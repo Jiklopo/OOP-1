@@ -14,6 +14,7 @@ public class Person {
 		this.gender = gender;
 	}
 	
+	
 	public String toString() {
 		return gender.toString();
 	}

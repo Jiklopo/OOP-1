@@ -3,8 +3,7 @@ public class Course {
 	public int credits;
 	public Course[] prerequisites;
 	
-	
-	
+		
 	public Course() {
 	}
 	

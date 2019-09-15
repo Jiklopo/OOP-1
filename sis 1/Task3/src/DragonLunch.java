@@ -11,8 +11,7 @@ public class DragonLunch {
 	public DragonLunch(Person p) {
 		this();
 		kidnapp(p);
-	}
-	
+	}	
 	
 	
 	public boolean kidnapp(Person p) {

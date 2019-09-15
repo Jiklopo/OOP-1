@@ -21,6 +21,7 @@ package student;
 		
 		public void incYear() {
 			year++;
+			
 		}
 		
 		public String toString() {

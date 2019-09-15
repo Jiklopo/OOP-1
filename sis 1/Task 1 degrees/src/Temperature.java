@@ -19,6 +19,7 @@ public class Temperature {
 	public Temperature(double value, char scale) {
 		this(scale);
 		this.value = value;
+		
 	}
 	
 	
