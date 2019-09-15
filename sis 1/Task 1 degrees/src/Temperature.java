@@ -1,8 +1,7 @@
 
 public class Temperature {
 	private double value;
-	private char scale;
-	
+	private char scale;	
 	
 	
 	public Temperature() {

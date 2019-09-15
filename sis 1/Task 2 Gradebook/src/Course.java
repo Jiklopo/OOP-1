@@ -1,6 +1,6 @@
 public class Course {
 	public String name, description;
-	public int credits;
+	public int credits;//
 	public Course[] prerequisites;
 	
 		

@@ -5,6 +5,7 @@ public class Gradebook {
 	private Course course;
 	
 	
+	
 	public Gradebook() {
 		gradeInfos = new ArrayList<GradeInfo>();
 		course = new Course();

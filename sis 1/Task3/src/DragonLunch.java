@@ -4,7 +4,6 @@ public class DragonLunch {
 	public ArrayList<Person> prisoners;
 	
 	
-	
 	public DragonLunch() {
 		prisoners = new ArrayList<Person>();
 	}

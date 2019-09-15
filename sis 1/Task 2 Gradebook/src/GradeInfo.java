@@ -4,7 +4,7 @@ public class GradeInfo {
 	private Student student;
 	private double grade;
 	
-	
+	//
 	GradeInfo(){
 		student = new Student();
 	}	

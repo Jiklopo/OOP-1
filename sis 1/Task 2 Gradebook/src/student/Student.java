@@ -3,6 +3,7 @@ package student;
 		public String name, id;
 		int year;
 		
+		
 		public Student() {
 			year = 1;
 			name = "";

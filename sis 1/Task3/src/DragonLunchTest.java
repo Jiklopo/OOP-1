@@ -20,4 +20,5 @@ public class DragonLunchTest {
 			System.out.println("Dragon will be hungry!");			
 		}
 	}
+	
 }
