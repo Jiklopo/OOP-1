@@ -22,7 +22,7 @@ public class GradeInfo {
 	}
 	
 	public void setGrade(double grade) {
-		if (grade > 0 && grade <= 4)
+		if (grade > 0 && grade <= 100)
 			this.grade = grade;
 		else this.grade = 0;
 	}

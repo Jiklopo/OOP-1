@@ -39,7 +39,8 @@ public class Gradebook {
 	public String getReport() {
 		return "Class average is " + getAvg() +
 				".\nUnluckiest student is " + getUnluckiest() +
-				".\nBest student is " + getBest();
+				".\nBest student is " + getBest() +
+				".\n" + getGradeStats();
 	}
 	
 	private double getAvg() {
@@ -68,6 +69,28 @@ public class Gradebook {
 		return unluckiest;
 	}
 	
+	private String getGradeStats() {
+		int low = 0;
+		int high = 9;
+		String gradeStats = "";
+		for(int i = 0; i < 10; i++) {
+			gradeStats += low + "-" + high + ": " + countGrades(low, high);
+			low += 10;
+			high += 10;
+			gradeStats += "\n";
+		}
+		gradeStats += "100: " + countGrades(100, 100);
+		return gradeStats;
+	}
+	
+	private int countGrades(int a, int b) {
+		int cnt = 0;
+		for(GradeInfo gr: gradeInfos) {
+			if(gr.getGrade() <= b && gr.getGrade() >= a)
+				cnt++;
+		}
+		return cnt;
+	}
 	public String toString() {
 		return course.name;
 	}
