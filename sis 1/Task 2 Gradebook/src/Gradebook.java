@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Gradebook {
 	public ArrayList<GradeInfo> gradeInfos;
-	private Course course;
+	public Course course;
 	
 	
 	
@@ -93,5 +93,13 @@ public class Gradebook {
 	}
 	public String toString() {
 		return course.name;
+	}
+	public boolean equals(Object o) {
+		if(o.getClass() != this.getClass())
+			return false;
+		Gradebook gr = (Gradebook)o;
+		if(course.name == gr.course.name)
+			return true;
+		return false;
 	}
 }

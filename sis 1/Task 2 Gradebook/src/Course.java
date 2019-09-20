@@ -5,6 +5,9 @@ public class Course {
 	
 		
 	public Course() {
+		name = "";
+		description = "";
+		credits = 0;
 	}
 	
 	public Course(String name) {

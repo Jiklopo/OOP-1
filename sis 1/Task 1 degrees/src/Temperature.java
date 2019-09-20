@@ -1,18 +1,22 @@
 
 public class Temperature {
-	private double value;
-	private char scale;	
+	private double value;//значение температуры
+	private char scale;	//единица измерени€
 	
 	
 	public Temperature() {
+		scale = 'C';
+		value = 0;//ѕустой конструктор нужен
 	}
 	
-	public Temperature(double value) {
+	public Temperature(double value) {//только, чтобы задать значение, ÷ельсий по умолчанию
 		this.value = value;
+		scale = 'C';
 	}
 	
 	public Temperature(char scale) {
 		setScale(scale);
+		value = 0;
 	}
 	
 	public Temperature(double value, char scale) {
@@ -54,7 +58,7 @@ public class Temperature {
 	}
 	
 	public char getScale() {
-		return scale;
+		return scale;//ѕросто получить единицу измерени€
 	}
 	
 	public double getValue() {
