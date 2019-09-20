@@ -6,9 +6,9 @@ public class Pawn extends Piece
 		super();
 	}
 	
-	Pawn(Position position, fractions fraction)
+	Pawn(Position position)
 	{
-		super(position, fraction);
+		super(position);
 	}
 
 }

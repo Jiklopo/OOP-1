@@ -3,31 +3,25 @@ public abstract class Piece
 {
 	private Position position, movement;
 	private char symbol;
-	fractions fraction;
-	
-	enum fractions {WHITE, BLACK};
 	
 	Piece()
 	{
 		position = new Position();
 		movement = new Position(1, 0);
-		fraction = fractions.WHITE;
 		symbol = '*';
 	}
 	
-	Piece(Position position, fractions fraction)
+	Piece(Position position)
 	{
 		this();
 		this.position = position;
-		this.fraction = fraction;
 	}
 	
-	Piece(char symbol, Position position, Position movement, fractions fraction)
+	Piece(char symbol, Position position, Position movement)
 	{
 		this.symbol = symbol;
 		this.position = position;
 		this.movement = movement;
-		this.fraction = fraction;
 	}
 	
 	

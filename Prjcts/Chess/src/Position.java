@@ -49,7 +49,7 @@ public class Position {
 		return false;
 	}
 	
-	private boolean isMoveValid(int a, int b)
+	public boolean isMoveValid(int a, int b)
 	{
 		if(a + b < 0)
 			return false;
@@ -59,7 +59,12 @@ public class Position {
 			return true;		
 	}
 	
-	
+	public boolean isMoveValid(Position p)
+	{
+		if (vertcl == p.vertcl && horizntl == p.horizntl)
+			return false;
+		return true;
+	}
 	
 	public boolean move(Position p)
 	{

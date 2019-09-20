@@ -4,17 +4,20 @@ public class Game
 {
 	private Piece[] whites, blacks;
 	private char[][] board;
+	private whoseTurn turn;
 	private Scanner input = new Scanner(System.in);
-	
+
+	enum whoseTurn {BLACK, WHITE};
 	Game()
 	{
-		whites = new Piece[16];
-		blacks = new Piece[16];
+		whites = new Piece[8];
+		blacks = new Piece[8];
 		board = new char[8][8];
+		turn = whoseTurn.WHITE;
 		for(int i = 0; i < 8; i++)
 		{
-			whites[i] = new Pawn(new Position(1, i), Piece.fractions.WHITE);
-			blacks[i] = new Pawn(new Position(6, i), Piece.fractions.BLACK);
+			whites[i] = new Pawn(new Position(1, i));
+			blacks[i] = new Pawn(new Position(6, i));
 		}
 		for(int i = 0; i < 8; i++)
 		{
@@ -28,51 +31,56 @@ public class Game
 	public void start()
 	{
 		System.out.println(drawBoard());
-		String s1 = input.next();
-		String s2 = input.next();
-		makeMove(s1, s2);
-		System.out.println(drawBoard());
+		if(turn == whoseTurn.WHITE)
+			System.out.println("White's turn");
+		else
+			System.out.println("Black's turn");
+		String s1 = null, s2 = null;
+		while(s1 != "stop")
+		{
+			s1 = input.next();
+			s2 = input.next();
+			makeMove(s1, s2);
+			System.out.println(drawBoard());
+		}
 	}
 	
 	public void makeMove(String from, String to)
 	{
-		Position prev = new Position();
-		char c = '*';
-		boolean isChanged = false;
-		for(int i = 0; i < 8; i++)
+		Piece[] pieces = null;
+		if (turn == whoseTurn.WHITE)
+			pieces = whites;
+		else
+			pieces = blacks;
+		for(Piece p: pieces)
 		{
-			if(whites[i].getPosition().toString() == from)
+			if(p.getPosition().toString().equals(from))
 			{
-				prev = whites[i].getPosition();
-				c = whites[i].getSymbol();
-				isChanged = whites[i].move(new Position(to));
-				break;
+				if(p.getPosition().isMoveValid(new Position(to)))
+				{
+					board[p.getVertcl()][p.getHorizntl()] = ' ';
+					p.move(new Position(to));
+					board[p.getVertcl()][p.getHorizntl()] = p.getSymbol();
+					if(turn == whoseTurn.WHITE)
+						turn = whoseTurn.BLACK;
+					else
+						turn = whoseTurn.WHITE;
+				}
 			}
-			else if(blacks[i].getPosition().toString() == from)
-			{
-				prev = blacks[i].getPosition();
-				c = blacks[i].getSymbol();
-				isChanged = blacks[i].move(new Position(to));
-				break;
-			}
-		}
-		if(isChanged)
-		{
-			board[prev.getVertcl()][prev.getHorizntl()] = c;
-		}
+		}		
 	}
 	
 	private String drawBoard()
 	{
-		String drawnBoard = "";
-		for(int i = 0; i < 8; i++)
-		{
+		String drawnBoard = "  A   B   C   D   E   F   G   H  \n";
+		for(int i = 7; i >= 0; i--)
+		{			
 			drawnBoard += "_________________________________\n|";
 			for(int j = 0; j < 8; j++)
 			{
 				drawnBoard += " " + board[i][j] + " |";
 			}
-			drawnBoard += "\n";
+			drawnBoard += (i + 1) + "\n";
 			
 		}
 		drawnBoard += "_________________________________";
