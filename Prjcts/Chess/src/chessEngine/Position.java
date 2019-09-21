@@ -1,19 +1,20 @@
+package chessEngine;
 
 public class Position {
 	private int horizntl, vertcl;
 	
-	Position()
+	public Position()
 	{
 		horizntl = vertcl = 0;
 	}
 	
-	Position(int vertcl, int horizntl)
+	public Position(int vertcl, int horizntl)
 	{
 		this.vertcl = vertcl;
 		this.horizntl = horizntl;
 	}
 	
-	Position(String position)
+	public Position(String position)
 	{
 		vertcl = Integer.parseInt(position.charAt(1) + "") - 1;
 		horizntl = (int)position.charAt(0) - 97;
@@ -66,29 +67,14 @@ public class Position {
 		return true;
 	}
 	
-	public boolean move(Position p)
+	public int getDx(Position p)
 	{
-//		if(isMoveValid(horizntl, p.horizntl) || isMoveValid(vertcl, p.vertcl))
-//		{
-//			horizntl += p.horizntl;
-//			vertcl += p.vertcl;
-//			return true;
-//		}
-//		return false;
-		horizntl = p.horizntl;
-		vertcl = p.vertcl;
-		return true;
+		return horizntl - p.horizntl;
 	}
 	
-	public boolean move(int vertcl,  int horizntl)
+	public int getDy(Position p)
 	{
-		if(isMoveValid(horizntl, this.horizntl) || isMoveValid(vertcl, this.vertcl))
-		{
-			this.horizntl += horizntl;
-			this.vertcl += vertcl;
-			return true;
-		}
-		return false;
+		return vertcl - p.vertcl;
 	}
 	
 	public String toString()
