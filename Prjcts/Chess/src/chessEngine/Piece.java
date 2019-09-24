@@ -2,7 +2,6 @@ package chessEngine;
 public abstract class Piece
 {
 	protected Position position;
-	protected int horizntlMove, vertclMove;
 	private char symbol;
 	fractions fraction;
 	
@@ -20,7 +19,7 @@ public abstract class Piece
 		this.position = position;
 	}
 	
-	Piece(char symbol, Position position, fractions fraction)
+	public Piece(char symbol, Position position, fractions fraction)
 	{
 		this.symbol = symbol;
 		this.position = position;
@@ -37,7 +36,22 @@ public abstract class Piece
 		return false;
 	}
 	
+	public boolean kill(Piece piece)
+	{
+		if(isKillValid(piece.getPosition()))
+		{
+			position = piece.getPosition();
+			return true;
+		}
+		return false;
+	}
+	
 	public boolean isMoveValid(Position pos)
+	{
+		return true;
+	}
+	
+	public boolean isKillValid(Position pos)
 	{
 		return true;
 	}

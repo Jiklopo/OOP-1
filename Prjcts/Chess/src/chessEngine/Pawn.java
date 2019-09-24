@@ -3,11 +3,11 @@ package chessEngine;
 public final class Pawn extends Piece
 {
 	private boolean moveMade;
+	
 	{
-		vertclMove = 1;
-		horizntlMove = 0;
 		moveMade = false;
 	}
+	
 	public Pawn()
 	{
 		super();
@@ -38,6 +38,17 @@ public final class Pawn extends Piece
 		}
 		else
 			return false;
+	}
+	
+	public boolean isKillValid(Position pos)
+	{
+		int dx = pos.getDx(position);
+		int dy = pos.getDy(position);
+		if(fraction == fractions.BLACK)
+			dy *= -1;
+		if(dy == 1 && (dx == 1 || dx == -1))
+			return true;
+		return false;
 	}
 
 }

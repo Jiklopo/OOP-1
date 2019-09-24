@@ -85,13 +85,21 @@ public class Position {
 		return string;
 	}
 	
-	public boolean equals(Object o)
+	public boolean equals(Object obj)
 	{
-		if(this.getClass() != o.getClass())
+		if(this.getClass() != obj.getClass())
 			return false;
-		Position temp = (Position)o;
-		if(temp.toString() != this.toString())
-			return false;
-		return true;
+		Position pos = (Position)obj;
+		if(pos.toString().equals(this.toString()))
+			return true;
+		return false;
+	}
+	
+	public int hashCode()
+	{
+		int result = 17;
+		result = 31 * result + horizntl;
+		result = 31 * result + vertcl;
+		return result;
 	}
 }
