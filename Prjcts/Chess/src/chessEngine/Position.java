@@ -89,8 +89,8 @@ public class Position {
 	{
 		if(this.getClass() != obj.getClass())
 			return false;
-		Position pos = (Position)obj;
-		if(pos.toString().equals(this.toString()))
+		Position position = (Position)obj;
+		if(position.toString().equals(this.toString()))
 			return true;
 		return false;
 	}

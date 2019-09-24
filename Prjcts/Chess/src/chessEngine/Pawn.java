@@ -18,12 +18,12 @@ public final class Pawn extends Piece
 		super(symbol, position, fraction);
 	}
 	
-	public boolean isMoveValid(Position pos)
+	public boolean isMoveValid(Position position)
 	{
-		int dx = pos.getDx(position);
+		int dx = position.getDx(this.position);
 		if(dx != 0)
 			return false;
-		int dy = pos.getDy(position);
+		int dy = position.getDy(this.position);
 		if(fraction == fractions.BLACK)
 			dy *= -1;
 		if(dy <= 2 && dy > 0 && !moveMade)
@@ -40,10 +40,10 @@ public final class Pawn extends Piece
 			return false;
 	}
 	
-	public boolean isKillValid(Position pos)
+	public boolean isKillValid(Position position)
 	{
-		int dx = pos.getDx(position);
-		int dy = pos.getDy(position);
+		int dx = position.getDx(this.position);
+		int dy = position.getDy(this.position);
 		if(fraction == fractions.BLACK)
 			dy *= -1;
 		if(dy == 1 && (dx == 1 || dx == -1))

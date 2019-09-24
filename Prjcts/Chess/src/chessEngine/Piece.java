@@ -2,6 +2,7 @@ package chessEngine;
 public abstract class Piece
 {
 	protected Position position;
+	protected int dx, dy;
 	private char symbol;
 	fractions fraction;
 	
@@ -26,11 +27,11 @@ public abstract class Piece
 		this.fraction = fraction;
 	}
 	
-	public boolean move(Position pos)
+	public boolean move(Position position)
 	{
-		if(isMoveValid(pos))
+		if(isMoveValid(position))
 		{
-			position = pos;
+			this.position = position;
 			return true;
 		}
 		return false;
@@ -46,12 +47,12 @@ public abstract class Piece
 		return false;
 	}
 	
-	public boolean isMoveValid(Position pos)
+	public boolean isMoveValid(Position position)
 	{
 		return true;
 	}
 	
-	public boolean isKillValid(Position pos)
+	public boolean isKillValid(Position position)
 	{
 		return true;
 	}
@@ -74,5 +75,11 @@ public abstract class Piece
 	public int getVertcl()
 	{
 		return position.getVertcl();
+	}
+	
+	protected void assignDxDy(Position position)
+	{
+		dx = position.getDx(this.position);
+		dy = position.getDy(this.position);
 	}
 }
