@@ -23,7 +23,6 @@ public class ConsoleChess
 			drawBoard();
 			from = input.next();
 			to = input.next();
-			System.out.println(from + " " + to);
 			if(!game.makeMove(from, to))
 				System.out.println("WRONG MOVE!");
 		}

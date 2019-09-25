@@ -37,6 +37,9 @@ public class Game
 		pieces.add(new Queen('P', new Position(0, 3), Piece.fractions.WHITE));//Adding Queen
 		pieces.add(new Queen('Ü', new Position(7, 3), Piece.fractions.BLACK));
 		
+		pieces.add(new King('$', new Position(0,4), Piece.fractions.WHITE));
+		pieces.add(new King('$', new Position(7,4), Piece.fractions.BLACK));
+		
 		for(int i = 0; i < pieces.size(); i++)//fill board with Pieces
 		{
 			Position pos = pieces.get(i).getPosition();
@@ -50,11 +53,13 @@ public class Game
 	{
 		Position destination = new Position(to);
 		Position start = new Position(from);
+		
 		Piece.fractions enemy = null;
 		if (turn == Piece.fractions.WHITE)
 			enemy = Piece.fractions.BLACK;
 		else
 			enemy = Piece.fractions.WHITE;
+		
 		for(Piece p: pieces)
 		{
 			if(p.getPosition().equals((Object)start))
@@ -67,9 +72,9 @@ public class Game
 						{
 							if(target.fraction == enemy)
 							{
-								if(p.kill(target))
+								if(!checkCollision(p, destination))
 								{
-									if(checkCollision(p, destination)) 
+									if(p.kill(target)) 
 									{
 										pieces.remove(target);
 										board[destination.getVertcl()][destination.getHorizntl()] = p.getSymbol();
@@ -82,9 +87,9 @@ public class Game
 							return false; //if not an enemy
 						}
 					}
-					if(p.move(destination))
+					if(!checkCollision(p, destination))
 					{
-						if(checkCollision(p, destination))
+						if(p.move(destination))
 						{
 							board[destination.getVertcl()][destination.getHorizntl()] = p.getSymbol();
 							board[start.getVertcl()][start.getHorizntl()] = '\u0000';
@@ -100,26 +105,55 @@ public class Game
 	
 	private boolean checkCollision(Piece piece, Position destination)
 	{
-		return true;
-//		if(piece.getClass() == Knight.class)
-//			return false;
-//		int dx = destination.getDx(piece.getPosition());
-//		int dy = destination.getDy(piece.getPosition());
-//		Position start = piece.getPosition();
-//		if(dx < 0)
-//			dx = -1;
-//		else if(dx > 0)
-//			dx = 1;
-//		if(dy < 0)
-//			dy = -1;
-//		else if(dy > 0)
-//			dy = 1;
-//		for(int i = 0; start.getHorizntl() + dy * i < 8 || start.getVertcl() + dx * i < 8; i++)
-//		{
-//			if(board[start.getHorizntl() + dy * i][start.getVertcl() + dx * i] != '\u0000')
-//				return true;
-//		}
-//		return false;
+		if(piece instanceof Knight)
+			return false;
+		
+		if(piece instanceof Pawn)
+		{
+			int dy = 0;
+			if(piece.fraction == Piece.fractions.BLACK)
+				dy = -1;
+			else 
+				dy = 1;
+			if(board[piece.getVertcl() + dy][piece.getHorizntl()] == '\u0000')
+			{
+				if(Math.abs(destination.getDy(piece.getPosition())) == 2)
+				{
+					if(board[piece.getVertcl() + (dy * 2)][piece.getHorizntl()] == '\u0000')
+						return false;
+				}				
+			}
+		}
+		
+		int dx = destination.getDx(piece.getPosition());
+		int dy = destination.getDy(piece.getPosition());
+		if(Math.abs(dx) <= 1 && Math.abs(dy) <= 1)
+			return false;
+		return checkCollision1(piece, destination, dx, dy);
+	}
+	
+	private boolean checkCollision1(Piece piece, Position destination, int dx, int dy)
+	{
+		Position start = piece.getPosition();
+		if(Math.abs(dy) == 1)
+			return false;
+		if(dx < 0)
+			dx = -1;
+		else if(dx > 0)
+			dx = 1;
+		if(dy < 0)
+			dy = -1;
+		else if(dy > 0)
+			dy = 1;
+		for(int i = 1; i < 8; i++)
+		{
+			if(board[start.getHorizntl() + (dy * i)][start.getVertcl() + (dx * i)] != '\u0000')
+			{
+				System.out.println("AAAA");
+				return true;	
+			}
+		}
+		return false;
 	}
 	
 	private void changeTurn()

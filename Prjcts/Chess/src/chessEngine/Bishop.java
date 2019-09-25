@@ -1,6 +1,6 @@
 package chessEngine;
 
-public class Bishop extends Piece
+public final class Bishop extends Piece
 {
 	public Bishop()
 	{
@@ -19,10 +19,5 @@ public class Bishop extends Piece
 		if(dx != 0 && dy != 0 && Math.abs(dx) == Math.abs(dy))
 			return true;
 		return false;
-	}
-	
-	public boolean isKillValid(Position position)
-	{
-		return isMoveValid(position);
 	}
 }

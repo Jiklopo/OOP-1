@@ -47,7 +47,10 @@ public final class Pawn extends Piece
 		if(fraction == fractions.BLACK)
 			dy *= -1;
 		if(dy == 1 && (dx == 1 || dx == -1))
+		{
+			moveMade = true;
 			return true;
+		}
 		return false;
 	}
 

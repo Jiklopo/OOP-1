@@ -1,6 +1,6 @@
 package chessEngine;
 
-public class King extends Piece
+public final class King extends Piece
 {
 	public King()
 	{
@@ -19,10 +19,5 @@ public class King extends Piece
 		if(Math.abs(dx) <= 1 && Math.abs(dy) <= 1)
 			return true;
 		return false;
-	}
-	
-	public boolean isKillValid(Position position)
-	{
-		return isMoveValid(position);
 	}
 }

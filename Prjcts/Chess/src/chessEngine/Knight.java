@@ -14,15 +14,10 @@ public class Knight extends Piece
 	
 	public boolean isMoveValid(Position position)
 	{
-		int dx = position.getDx(this.position);
-		int dy = position.getDy(this.position);
-		if((Math.abs(dx) == 1 && Math.abs(dy) == 2) || ((Math.abs(dx) == 2 && Math.abs(dy) == 1)))
+		int dx = Math.abs(position.getDx(this.position));
+		int dy = Math.abs(position.getDy(this.position));
+		if((dx == 1 && dy == 2) || ((dx == 2 && dy == 1)))
 			return true;
 		return false;
-	}
-	
-	public boolean isKillValid(Position position)
-	{
-		return isMoveValid(position);
 	}
 }

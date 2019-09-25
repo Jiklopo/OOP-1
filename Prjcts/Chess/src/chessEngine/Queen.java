@@ -1,6 +1,6 @@
 package chessEngine;
 
-public class Queen extends Piece
+public final class Queen extends Piece
 {
 	public Queen()
 	{
@@ -23,10 +23,5 @@ public class Queen extends Piece
 		if((dx == 0 && dy != 0) || (dy == 0 && dx != 0))
 			return true;
 		return false;
-	}
-	
-	public boolean isKillValid(Position position)
-	{
-		return isMoveValid(position);
 	}
 }

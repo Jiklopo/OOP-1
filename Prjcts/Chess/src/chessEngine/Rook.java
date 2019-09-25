@@ -1,6 +1,6 @@
 package chessEngine;
 
-public class Rook extends Piece
+public final class Rook extends Piece
 {
 	
 	public Rook() { super(); }
@@ -8,13 +8,6 @@ public class Rook extends Piece
 	public Rook(char symbol, Position position, fractions fraction)
 	{
 		super(symbol, position, fraction);
-	}
-	
-	
-	
-	public boolean isKillValid(Position position)
-	{
-		return isMoveValid(position);
 	}
 
 	public boolean isMoveValid(Position position)
