@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import chessEngine.Game;
-import chessEngine.Piece;
 
 public class ConsoleChess
 {
@@ -19,7 +18,7 @@ public class ConsoleChess
 		String from = null, to = null;
 		while(from != "stop" || to != "stop")
 		{
-			determineTurn();
+			System.out.println(game.getTurn() + "'s turn.");
 			drawBoard();
 			from = input.next();
 			to = input.next();
@@ -27,15 +26,6 @@ public class ConsoleChess
 				System.out.println("WRONG MOVE!");
 		}
 		input.close();
-	}
-	
-	private void determineTurn()
-	{
-		if(game.getTurn() == Piece.fractions.BLACK)
-			System.out.print("Black's ");
-		else
-			System.out.print("White's ");
-		System.out.println("turn.");
 	}
 	
 	private void drawBoard()
@@ -54,5 +44,12 @@ public class ConsoleChess
 		drawnBoard += "  _______________________________\n";
 		drawnBoard += "   A   B   C   D   E   F   G   H  ";
 		System.out.println(drawnBoard);
+	}
+	
+	
+	private String welcomeMessage()
+	{
+		String welcome = "";
+		return welcome;
 	}
 }

@@ -85,11 +85,11 @@ public class Position {
 		return string;
 	}
 	
-	public boolean equals(Object obj)
+	public boolean equals(Object o)
 	{
-		if(this.getClass() != obj.getClass())
+		if(this.getClass() != o.getClass())
 			return false;
-		Position position = (Position)obj;
+		Position position = (Position)o;
 		if(position.toString().equals(this.toString()))
 			return true;
 		return false;

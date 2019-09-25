@@ -2,43 +2,45 @@ package chessEngine;
 
 import java.util.ArrayList;
 
+import chessEngine.Piece.fractions;
+
 public class Game
 {
 	private ArrayList<Piece> pieces;
 	private char[][] board;
-	private Piece.fractions turn;
+	private fractions turn;
 	
 	public Game()
 	{
 		pieces = new ArrayList<Piece>();
 		board = new char[8][8];
-		turn = Piece.fractions.WHITE;
+		turn = fractions.WHITE;
 		for(int i = 0; i < 8; i++)
 		{
-			pieces.add(new Pawn('@', new Position(1, i), Piece.fractions.WHITE));//Adding pawns
-			pieces.add(new Pawn('*', new Position(6, i), Piece.fractions.BLACK));
+			pieces.add(new Pawn('@', new Position(1, i), fractions.WHITE));//Adding pawns
+			pieces.add(new Pawn('*', new Position(6, i), fractions.BLACK));
 		}
 		
-		pieces.add(new Rook('^', new Position(0, 7), Piece.fractions.WHITE));//Adding rooks
-		pieces.add(new Rook('^', new Position(0, 0), Piece.fractions.WHITE));
-		pieces.add(new Rook('~', new Position(7, 0), Piece.fractions.BLACK));
-		pieces.add(new Rook('~', new Position(7, 7), Piece.fractions.BLACK));
+		pieces.add(new Rook('^', new Position(0, 7), fractions.WHITE));//Adding Rooks
+		pieces.add(new Rook('^', new Position(0, 0), fractions.WHITE));
+		pieces.add(new Rook('~', new Position(7, 0), fractions.BLACK));
+		pieces.add(new Rook('~', new Position(7, 7), fractions.BLACK));
 		
-		pieces.add(new Bishop('!', new Position(0, 5), Piece.fractions.WHITE));//Adding Bishops
-		pieces.add(new Bishop('!', new Position(0, 2), Piece.fractions.WHITE));
-		pieces.add(new Bishop('x', new Position(7, 2), Piece.fractions.BLACK));
-		pieces.add(new Bishop('x', new Position(7, 5), Piece.fractions.BLACK));
+		pieces.add(new Bishop('!', new Position(0, 5), fractions.WHITE));//Adding Bishops
+		pieces.add(new Bishop('!', new Position(0, 2), fractions.WHITE));
+		pieces.add(new Bishop('x', new Position(7, 2), fractions.BLACK));
+		pieces.add(new Bishop('x', new Position(7, 5), fractions.BLACK));
 		
-		pieces.add(new Knight('<', new Position(0, 1), Piece.fractions.WHITE));//Adding Knights
-		pieces.add(new Knight('<', new Position(0, 6), Piece.fractions.WHITE));
-		pieces.add(new Knight('>', new Position(7, 1), Piece.fractions.BLACK));
-		pieces.add(new Knight('>', new Position(7, 6), Piece.fractions.BLACK));
+		pieces.add(new Knight('<', new Position(0, 1), fractions.WHITE));//Adding Knights
+		pieces.add(new Knight('<', new Position(0, 6), fractions.WHITE));
+		pieces.add(new Knight('>', new Position(7, 1), fractions.BLACK));
+		pieces.add(new Knight('>', new Position(7, 6), fractions.BLACK));
 		
-		pieces.add(new Queen('P', new Position(0, 3), Piece.fractions.WHITE));//Adding Queen
-		pieces.add(new Queen('Ü', new Position(7, 3), Piece.fractions.BLACK));
+		pieces.add(new Queen('P', new Position(0, 3), fractions.WHITE));//Adding Queen
+		pieces.add(new Queen('Ü', new Position(7, 3), fractions.BLACK));
 		
-		pieces.add(new King('$', new Position(0,4), Piece.fractions.WHITE));
-		pieces.add(new King('$', new Position(7,4), Piece.fractions.BLACK));
+		pieces.add(new King('$', new Position(0,4), fractions.WHITE));//Adding Kings
+		pieces.add(new King('$', new Position(7,4), fractions.BLACK));
 		
 		for(int i = 0; i < pieces.size(); i++)//fill board with Pieces
 		{
@@ -54,11 +56,11 @@ public class Game
 		Position destination = new Position(to);
 		Position start = new Position(from);
 		
-		Piece.fractions enemy = null;
-		if (turn == Piece.fractions.WHITE)
-			enemy = Piece.fractions.BLACK;
+		fractions enemy = null;
+		if (turn == fractions.WHITE)
+			enemy = fractions.BLACK;
 		else
-			enemy = Piece.fractions.WHITE;
+			enemy = fractions.WHITE;
 		
 		for(Piece p: pieces)
 		{
@@ -106,34 +108,16 @@ public class Game
 	private boolean checkCollision(Piece piece, Position destination)
 	{
 		if(piece instanceof Knight)
-			return false;
-		
+			return false;		
 		if(piece instanceof Pawn)
 		{
-			int dy = 0;
-			if(piece.fraction == Piece.fractions.BLACK)
-				dy = -1;
-			else 
-				dy = 1;
-			if(board[piece.getVertcl() + dy][piece.getHorizntl()] == '\u0000')
-			{
-				if(Math.abs(destination.getDy(piece.getPosition())) == 2)
-				{
-					if(board[piece.getVertcl() + (dy * 2)][piece.getHorizntl()] == '\u0000')
-						return false;
-				}				
-			}
+			return checkPawnCollision(piece, destination);
 		}
 		
 		int dx = destination.getDx(piece.getPosition());
 		int dy = destination.getDy(piece.getPosition());
 		if(Math.abs(dx) <= 1 && Math.abs(dy) <= 1)
 			return false;
-		return checkCollision1(piece, destination, dx, dy);
-	}
-	
-	private boolean checkCollision1(Piece piece, Position destination, int dx, int dy)
-	{
 		Position start = piece.getPosition();
 		if(Math.abs(dy) == 1)
 			return false;
@@ -149,19 +133,36 @@ public class Game
 		{
 			if(board[start.getHorizntl() + (dy * i)][start.getVertcl() + (dx * i)] != '\u0000')
 			{
-				System.out.println("AAAA");
 				return true;	
 			}
 		}
 		return false;
 	}
 	
+	private boolean checkPawnCollision(Piece piece, Position destination)
+	{
+		int dy;
+		if(piece.fraction == fractions.BLACK)
+			dy = -1;
+		else 
+			dy = 1;
+		if(board[piece.getVertcl() + dy][piece.getHorizntl()] == '\u0000')
+		{
+			if(Math.abs(destination.getDy(piece.getPosition())) == 2)
+			{
+				if(board[piece.getVertcl() + (dy * 2)][piece.getHorizntl()] == '\u0000')
+					return false;
+			}				
+		}
+		return true;
+	}
+	
 	private void changeTurn()
 	{
-		if(turn == Piece.fractions.WHITE)
-			turn = Piece.fractions.BLACK;
+		if(turn == fractions.WHITE)
+			turn = fractions.BLACK;
 		else
-			turn = Piece.fractions.WHITE;
+			turn = fractions.WHITE;
 	}
 	
 	public char[][] getBoard()
@@ -169,8 +170,10 @@ public class Game
 		return board;
 	}
 	
-	public Piece.fractions getTurn()
+	public String getTurn()
 	{
-		return turn;
+		if(turn == fractions.BLACK)
+			return "Black";
+		return "White";
 	}
 }

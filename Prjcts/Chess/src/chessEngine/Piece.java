@@ -6,6 +6,7 @@ public abstract class Piece
 	fractions fraction;
 	
 	public enum fractions {WHITE, BLACK};
+	
 	public Piece()
 	{
 		position = new Position();
