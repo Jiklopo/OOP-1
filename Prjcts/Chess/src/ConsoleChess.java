@@ -14,7 +14,7 @@ public class ConsoleChess
 	
 	public void start()
 	{
-		System.out.println("Hello");
+		System.out.println(welcomeMessage());
 		String from = null, to = null;
 		while(from != "stop" || to != "stop")
 		{
@@ -49,7 +49,7 @@ public class ConsoleChess
 	
 	private String welcomeMessage()
 	{
-		String welcome = "";
+		String welcome = "Hello";
 		return welcome;
 	}
 }

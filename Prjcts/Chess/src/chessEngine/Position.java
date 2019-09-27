@@ -1,7 +1,7 @@
 package chessEngine;
 
 public class Position {
-	private int horizntl, vertcl;
+	public int horizntl, vertcl;
 	
 	public Position()
 	{
@@ -32,7 +32,7 @@ public class Position {
 	
 	public boolean setHorizntl(int horizntl)
 	{
-		if (isMoveValid(this.horizntl, horizntl))
+		if (isPosValid(horizntl))
 		{
 			this.horizntl = horizntl;
 			return true;
@@ -42,7 +42,7 @@ public class Position {
 	
 	public boolean setVertcl(int vertcl)
 	{
-		if (isMoveValid(this.vertcl, vertcl))
+		if (isPosValid(vertcl))
 		{
 			this.vertcl = vertcl;
 			return true;
@@ -50,30 +50,22 @@ public class Position {
 		return false;
 	}
 	
-	public boolean isMoveValid(int a, int b)
+	public boolean isPosValid(int a)
 	{
-		if(a + b < 0)
-			return false;
-		else if(a + b >= 8)
-			return false;
-		else
-			return true;		
-	}
-	
-	public boolean isMoveValid(Position p)
-	{
-		if (vertcl == p.vertcl && horizntl == p.horizntl)
+		if(a > 7 || a < 0)
 			return false;
 		return true;
 	}
 	
 	public int getDx(Position p)
 	{
+		System.out.println(p.horizntl);
 		return horizntl - p.horizntl;
 	}
 	
 	public int getDy(Position p)
 	{
+		System.out.println(p.vertcl);
 		return vertcl - p.vertcl;
 	}
 	

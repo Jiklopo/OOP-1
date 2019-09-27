@@ -64,13 +64,13 @@ public class Game
 		
 		for(Piece p: pieces)
 		{
-			if(p.getPosition().equals((Object)start))
+			if(p.getPosition().equals(start))
 			{
 				if(p.fraction == turn)
 				{
 					for(Piece target: pieces)
 					{
-						if(target.getPosition().equals((Object)destination))
+						if(target.getPosition().equals(destination))
 						{
 							if(target.fraction == enemy)
 							{
@@ -113,25 +113,21 @@ public class Game
 		{
 			return checkPawnCollision(piece, destination);
 		}
+		Position start = piece.getPosition();
+		int dx = destination.getDx(start);
+		int dy = destination.getDy(start);
 		
-		int dx = destination.getDx(piece.getPosition());
-		int dy = destination.getDy(piece.getPosition());
+		System.out.println(piece.getVertcl() + " " + piece.getVertcl() + " " + dx + " " + dy);
 		if(Math.abs(dx) <= 1 && Math.abs(dy) <= 1)
 			return false;
-		Position start = piece.getPosition();
+		
 		if(Math.abs(dy) == 1)
 			return false;
-		if(dx < 0)
-			dx = -1;
-		else if(dx > 0)
-			dx = 1;
-		if(dy < 0)
-			dy = -1;
-		else if(dy > 0)
-			dy = 1;
+		dx = getSign(dx);
+		dy = getSign(dy);
 		for(int i = 1; i < 8; i++)
 		{
-			if(board[start.getHorizntl() + (dy * i)][start.getVertcl() + (dx * i)] != '\u0000')
+			if(board[start.horizntl + (dy * i)][start.vertcl + (dx * i)] != '\u0000')
 			{
 				return true;	
 			}
@@ -155,6 +151,15 @@ public class Game
 			}				
 		}
 		return true;
+	}
+	
+	private int getSign(int a)
+	{
+		if(a > 0)
+			return 1;
+		else if(a < 0)
+			return -1;
+		return 0;
 	}
 	
 	private void changeTurn()
