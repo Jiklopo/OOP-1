@@ -59,13 +59,11 @@ public class Position {
 	
 	public int getDx(Position p)
 	{
-		System.out.println(p.horizntl);
 		return horizntl - p.horizntl;
 	}
 	
 	public int getDy(Position p)
 	{
-		System.out.println(p.vertcl);
 		return vertcl - p.vertcl;
 	}
 	

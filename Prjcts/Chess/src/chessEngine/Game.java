@@ -9,9 +9,11 @@ public class Game
 	private ArrayList<Piece> pieces;
 	private char[][] board;
 	private fractions turn;
+	private boolean gameOver;
 	
 	public Game()
 	{
+		gameOver = false;
 		pieces = new ArrayList<Piece>();
 		board = new char[8][8];
 		turn = fractions.WHITE;
@@ -78,6 +80,11 @@ public class Game
 								{
 									if(p.kill(target)) 
 									{
+										if(target instanceof King)
+										{
+											gameOver = true;
+											return true;
+										}
 										pieces.remove(target);
 										board[destination.getVertcl()][destination.getHorizntl()] = p.getSymbol();
 										board[start.getVertcl()][start.getHorizntl()] = '\u0000';
@@ -109,25 +116,22 @@ public class Game
 	{
 		if(piece instanceof Knight)
 			return false;		
-		if(piece instanceof Pawn)
-		{
-			return checkPawnCollision(piece, destination);
-		}
+		
 		Position start = piece.getPosition();
 		int dx = destination.getDx(start);
 		int dy = destination.getDy(start);
 		
-		System.out.println(piece.getVertcl() + " " + piece.getVertcl() + " " + dx + " " + dy);
+		if(piece instanceof Pawn)
+				return checkPawnCollision(piece, destination);
+		
 		if(Math.abs(dx) <= 1 && Math.abs(dy) <= 1)
 			return false;
 		
-		if(Math.abs(dy) == 1)
-			return false;
 		dx = getSign(dx);
 		dy = getSign(dy);
-		for(int i = 1; i < 8; i++)
+		for(int i = 1; start.getVertcl() + (dy * i) != destination.getVertcl() && start.getHorizntl()+ (dx * i) != destination.horizntl; i++)
 		{
-			if(board[start.horizntl + (dy * i)][start.vertcl + (dx * i)] != '\u0000')
+			if(board[start.getVertcl() + (dy * i)][start.getHorizntl()+ (dx * i)] != '\u0000')
 			{
 				return true;	
 			}
@@ -148,7 +152,8 @@ public class Game
 			{
 				if(board[piece.getVertcl() + (dy * 2)][piece.getHorizntl()] == '\u0000')
 					return false;
-			}				
+			}		
+			return false;			
 		}
 		return true;
 	}
@@ -180,5 +185,10 @@ public class Game
 		if(turn == fractions.BLACK)
 			return "Black";
 		return "White";
+	}
+	
+	public boolean isGameOver()
+	{
+		return gameOver;
 	}
 }

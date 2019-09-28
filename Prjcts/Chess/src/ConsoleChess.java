@@ -24,8 +24,11 @@ public class ConsoleChess
 			to = input.next();
 			if(!game.makeMove(from, to))
 				System.out.println("WRONG MOVE!");
+			if(game.isGameOver())
+				break;
 		}
 		input.close();
+		System.out.println(game.getTurn() + " Win!");
 	}
 	
 	private void drawBoard()
