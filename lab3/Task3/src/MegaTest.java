@@ -1,5 +1,4 @@
 import java.util.Vector;
-
 public class MegaTest {
 
 	public static void main(String[] args) {

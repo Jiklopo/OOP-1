@@ -34,6 +34,11 @@ public class Manager extends Employee {
 		this.employees = employees;
 	}
 	
+	public void getBonus(double bonus)
+	{
+		setSalary(getSalary() + bonus);
+	}
+	
 	public boolean equals(Object o)
 	{
 		if(this.getClass() != o.getClass())

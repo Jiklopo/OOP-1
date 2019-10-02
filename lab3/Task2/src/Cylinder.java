@@ -1,16 +1,17 @@
 
 public class Cylinder extends Shape3D {
 
+	double height;
 	public Cylinder() {super();}
 	
 	public Cylinder(double height, double radius)
 	{
 		this.height = height;
-		this.radius = radius;
+		this.length = radius;
 	}
 	@Override
 	public double surfaceArea() {
-		return (2 * Math.PI * radius * height) + (crossSectionArea() * 2);
+		return (2 * Math.PI * length * height) + (crossSectionArea() * 2);
 	}
 
 	@Override
@@ -20,6 +21,6 @@ public class Cylinder extends Shape3D {
 
 	@Override
 	public double crossSectionArea() {
-		return Math.PI * Math.pow(radius, 2);
+		return Math.PI * Math.pow(length, 2);
 	}
 }

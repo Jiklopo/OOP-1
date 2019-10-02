@@ -129,7 +129,7 @@ public class Game
 		
 		dx = getSign(dx);
 		dy = getSign(dy);
-		for(int i = 1; start.getVertcl() + (dy * i) != destination.getVertcl() && start.getHorizntl()+ (dx * i) != destination.horizntl; i++)
+		for(int i = 1; start.getVertcl() + (dy * i) != destination.getVertcl() && start.getHorizntl()+ (dx * i) != destination.getHorizntl(); i++)
 		{
 			if(board[start.getVertcl() + (dy * i)][start.getHorizntl()+ (dx * i)] != '\u0000')
 			{

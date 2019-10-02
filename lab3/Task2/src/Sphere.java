@@ -5,7 +5,7 @@ public class Sphere extends Shape3D {
 	
 	public Sphere(double radius)
 	{
-		this.radius = radius;
+		this.length = radius;
 	}
 	@Override
 	public double surfaceArea() {
@@ -14,12 +14,12 @@ public class Sphere extends Shape3D {
 
 	@Override
 	public double volume() {
-		return (crossSectionArea() * radius * 4) / 3;
+		return (crossSectionArea() * length * 4) / 3;
 	}
 
 	@Override
 	public double crossSectionArea() {
-		return Math.PI * Math.pow(radius, 2);
+		return Math.PI * Math.pow(length, 2);
 	}
 
 }

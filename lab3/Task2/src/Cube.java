@@ -5,7 +5,7 @@ public class Cube extends Shape3D {
 	
 	public Cube(double a)
 	{
-		length = height = width = a;
+		length = a;
 	}
 
 	@Override

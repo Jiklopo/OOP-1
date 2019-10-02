@@ -1,7 +1,7 @@
 package chessEngine;
 
 public class Position {
-	public int horizntl, vertcl;
+	private int horizntl, vertcl;
 	
 	public Position()
 	{
