@@ -7,6 +7,7 @@ public class Student extends Person
 	
 	public Student()
 	{
+		super();
 		program = "Netu :(";
 		year = 1;
 		fee = 1.5;
