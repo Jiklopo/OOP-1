@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import gradeBook.*;
+
 public class GradeBookTest {//
 	public static void main(String[] args) {
 		Gradebook gb = new Gradebook(new Course("OOP"));

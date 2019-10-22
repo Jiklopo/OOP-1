@@ -1,3 +1,5 @@
+package gradeBook;
+
 public class Course {
 	public String name, description;
 	public int credits;//

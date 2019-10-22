@@ -1,3 +1,5 @@
+package gradeBook;
+
 import student.Student;
 
 public class GradeInfo {
