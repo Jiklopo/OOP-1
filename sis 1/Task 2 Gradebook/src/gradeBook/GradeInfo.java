@@ -5,14 +5,19 @@ import student.Student;
 public class GradeInfo {
 	private Student student;
 	private double grade;
+	private char mark;
 	
 	//
-	GradeInfo(){
+	GradeInfo()
+	{
 		student = new Student();
+		grade = 100;
+		mark = 'A';
 	}	
 	GradeInfo(String name, double grade){
 		student = new Student(name);
 		setGrade(grade);
+		analyzeMark(100);
 	}
 	GradeInfo(String name, String id){
 		student = new Student(name, id);
@@ -38,6 +43,19 @@ public class GradeInfo {
 	}
 	
 	public String toString() {
-		return student.name + ": " + grade;
+		return student.name + ": " + grade + ", " + mark;
+	}
+	
+	public void analyzeMark(double max)
+	{
+		if (max - grade <= 10)
+			mark = 'A';
+		else if (max - grade <= 20)
+			mark = 'B';
+		else if (max - grade <= 30)
+			mark = 'C';
+		else if (max - grade <= 40)
+			mark = 'D';
+		else mark = 'F';
 	}
 }

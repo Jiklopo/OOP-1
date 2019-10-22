@@ -30,19 +30,18 @@ public class Gradebook {
 				+ course.name + "! Type stop into the student name field to stop.";
 	}
 	
-	public boolean addGradeInfo(GradeInfo gradeInfo) {
+	public boolean add(GradeInfo gradeInfo) {
 		return gradeInfos.add(gradeInfo);
 	}
 	
-	public boolean addGradeInfo(String studentName, double grade) {
+	public boolean add(String studentName, double grade) {
 		return gradeInfos.add(new GradeInfo(studentName, grade));
 	}
 	
 	public String getReport() {
 		return "Class average is " + getAvg() +
-				".\nUnluckiest student is " + getUnluckiest() +
 				".\nBest student is " + getBest() +
-				".\n" + getGradeStats();
+				".\nUnluckiest student is " + getUnluckiest();
 	}
 	
 	private double getAvg() {
@@ -92,6 +91,23 @@ public class Gradebook {
 				cnt++;
 		}
 		return cnt;
+	}
+	
+	public String getNewMarks()
+	{
+		String res = "";
+		GradeInfo best = getBest();
+		for(GradeInfo gi: gradeInfos)
+		{
+			if(gi.equals(best))
+			{
+				res += best.toString() + "\n";
+				continue;
+			}
+			gi.analyzeMark(best.getGrade());
+			res += gi.toString() + "\n";
+		}
+		return res;
 	}
 	public String toString() {
 		return course.name;

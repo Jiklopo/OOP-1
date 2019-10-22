@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 import gradeBook.*;
 
-public class GradeBookTest {//
+public class GradeBookConsole {//
 	public static void main(String[] args) {
 		Gradebook gb = new Gradebook(new Course("OOP"));
 		Scanner input = new Scanner(System.in);
@@ -18,7 +18,7 @@ public class GradeBookTest {//
 			System.out.print("Grade: ");
 			grade = input.nextDouble();
 			System.out.println(grade);
-			gb.addGradeInfo(student, grade);
+			gb.add(student, grade);
 			input.nextLine();
 		}
 		input.close();
