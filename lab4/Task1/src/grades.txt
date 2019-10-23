@@ -1,7 +1,0 @@
-Ivanov Ivan: 100.0, A
-Petr Petrov: 99.0, A
-Leha Alekseev: 67.0, D
-ASD asd: 98.0, A
-Class average is 91.0.
-Best student is Ivanov Ivan: 100.0, A.
-Unluckiest student is Leha Alekseev: 67.0, D

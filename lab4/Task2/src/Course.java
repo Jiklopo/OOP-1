@@ -66,4 +66,13 @@ public class Course {
 		
 		return this.toString().equals(o.toString());
 	}
+
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((courseName == null) ? 0 : courseName.hashCode());
+		result = prime * result + ((instructor == null) ? 0 : instructor.hashCode());
+		result = prime * result + ((textbook == null) ? 0 : textbook.hashCode());
+		return result;
+	}
 }

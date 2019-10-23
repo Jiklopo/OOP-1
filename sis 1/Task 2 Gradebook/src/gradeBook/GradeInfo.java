@@ -43,7 +43,7 @@ public class GradeInfo {
 	}
 	
 	public String toString() {
-		return student.name + ": " + grade + ", " + mark;
+		return student.name + " - " + mark;
 	}
 	
 	public void analyzeMark(double max)

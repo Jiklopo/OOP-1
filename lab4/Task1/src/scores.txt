@@ -1,4 +1,5 @@
-Ivanov Ivan-100
-Petr Petrov-99
+Ivanov Ivan-50
+Petr Petrov-60
 Leha Alekseev-67
-ASD asd-98
+A A-65
+B B-78

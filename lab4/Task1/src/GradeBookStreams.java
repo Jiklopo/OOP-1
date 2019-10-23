@@ -5,10 +5,17 @@ import student.Student;
 
 public class GradeBookStreams {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException{
 		Gradebook gb = new Gradebook();
-		FileReader in = new FileReader("P:\\Библиотеки\\Documents\\KBTU\\Java OOP\\lab4\\Task1\\src\\scores.txt");
-		BufferedReader br = new BufferedReader(in);
+		BufferedReader br;
+		try {
+			br = new BufferedReader(new FileReader("src\\scores.txt"));
+		} catch (FileNotFoundException e) {
+			PrintWriter pw = new PrintWriter(new OutputStreamWriter(System.out));
+			pw.println("File scores.txt does not exist!");
+			pw.close();
+			return;
+		}
 		String line = br.readLine();
 		while(line != null)
 		{
@@ -18,12 +25,20 @@ public class GradeBookStreams {
 			gb.add(name, grade);			
 			line = br.readLine();
 		}
-		in.close();
 		br.close();
-		BufferedWriter bw = new BufferedWriter(new FileWriter("P:\\Библиотеки\\Documents\\KBTU\\Java OOP\\lab4\\Task1\\src\\grades.txt"));
+		BufferedWriter bw;
+		try
+		{
+			bw = new BufferedWriter(new FileWriter("src\\grades.txt", true));			
+		}
+		catch(IOException e)
+		{
+			PrintWriter pw = new PrintWriter(new OutputStreamWriter(System.out));
+			pw.println("File grades.txt does not exist!");
+			pw.close();
+			return;
+		}
 		bw.write(gb.getNewMarks());
-		bw.write(gb.getReport());
 		bw.close();
 	}
-
 }

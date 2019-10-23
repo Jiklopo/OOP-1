@@ -3,10 +3,17 @@ package gradeBook;
 import java.util.ArrayList;
 
 public class Gradebook {
-	public ArrayList<GradeInfo> gradeInfos;
-	public Course course;
+	private ArrayList<GradeInfo> gradeInfos;
+	private Course course;
+	private double sum;
+	private GradeInfo max, min;
 	
 	
+	{
+		max = new GradeInfo();
+		min = new GradeInfo();
+		sum = 0;
+	}
 	
 	public Gradebook() {
 		gradeInfos = new ArrayList<GradeInfo>();
@@ -20,7 +27,7 @@ public class Gradebook {
 	
 	public Gradebook(Course course, GradeInfo gradeInfo) {
 		this(course);
-		gradeInfos.add(gradeInfo);
+		add(gradeInfo);
 	}
 	
 	
@@ -31,11 +38,17 @@ public class Gradebook {
 	}
 	
 	public boolean add(GradeInfo gradeInfo) {
+		double grade = gradeInfo.getGrade();
+		sum += grade;
+		if(grade > max.getGrade())
+			max = gradeInfo;
+		if(grade < min.getGrade())
+			min = gradeInfo;
 		return gradeInfos.add(gradeInfo);
 	}
 	
 	public boolean add(String studentName, double grade) {
-		return gradeInfos.add(new GradeInfo(studentName, grade));
+		return add(new GradeInfo(studentName, grade));
 	}
 	
 	public String getReport() {
@@ -44,33 +57,19 @@ public class Gradebook {
 				".\nUnluckiest student is " + getUnluckiest();
 	}
 	
-	private double getAvg() {
-		double avg = 0;
-		for(GradeInfo gi: gradeInfos) {
-			avg += gi.getGrade();
-		}
-		return avg/gradeInfos.size();
+	public double getAvg() {
+		return sum / gradeInfos.size();
 	}
 	
-	private GradeInfo getBest() {
-		GradeInfo best = gradeInfos.get(0);
-		for(GradeInfo gi: gradeInfos) {
-			if(gi.getGrade() > best.getGrade())
-				best = gi;
-		}
-		return best;
+	public GradeInfo getBest() {
+		return max;
 	}
 	
-	private GradeInfo getUnluckiest() {
-		GradeInfo unluckiest = gradeInfos.get(0);
-		for(GradeInfo gi: gradeInfos) {
-			if(gi.getGrade() < unluckiest.getGrade())
-				unluckiest = gi;
-		}
-		return unluckiest;
+	public GradeInfo getUnluckiest() {
+		return min;
 	}
 	
-	private String getGradeStats() {
+	public String getGradeStats() {
 		int low = 0;
 		int high = 9;
 		String gradeStats = "";
@@ -99,19 +98,16 @@ public class Gradebook {
 		GradeInfo best = getBest();
 		for(GradeInfo gi: gradeInfos)
 		{
-			if(gi.equals(best))
-			{
-				res += best.toString() + "\n";
-				continue;
-			}
 			gi.analyzeMark(best.getGrade());
 			res += gi.toString() + "\n";
 		}
 		return res;
 	}
+	
 	public String toString() {
 		return course.name;
 	}
+	
 	public boolean equals(Object o) {
 		if(o.getClass() != this.getClass())
 			return false;
