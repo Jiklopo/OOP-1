@@ -1,5 +1,8 @@
+package CourseConstructor;
 
-public class Instructor {
+import java.io.Serializable;
+
+public class Instructor implements Serializable{
 	private String firstName, lastName, department, email;
 	
 	public Instructor() {};
@@ -54,7 +57,7 @@ public class Instructor {
 
 	public String toString()
 	{
-		return firstName + " " + lastName + " works at " + department + ", has email: " + email + ".";
+		return firstName + " " + lastName + " from " + department + ", email: " + email + ".";
 	}
 	
 	public boolean equals(Object o)

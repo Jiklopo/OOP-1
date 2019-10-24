@@ -1,5 +1,8 @@
+package CourseConstructor;
 
-public class Textbook {
+import java.io.Serializable;
+
+public class Textbook implements Serializable{
 	private String isbn, title, author;
 	
 	Textbook(){}
@@ -41,7 +44,7 @@ public class Textbook {
 	
 	public String toString()
 	{
-		return "Book " + title + " by " + author + " with isbn " + isbn;
+		return "Book " + title + " by " + author + " with isbn " + isbn + ".";
 	}
 	
 	public boolean equals(Object o)

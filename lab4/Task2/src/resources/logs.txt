@@ -1,0 +1,10 @@
+2019-10-24T15:57:08.122Vasekadded textbook Book tima by asas with isbn asd
+2019-10-24T15:57:22.416Vasek
+2019-10-24T16:22:21.972Vasek added textbook Book Prikoly by Tima with isbn 1234
+2019-10-24T16:22:34.190Vasek 
+2019-10-24T16:24:27.477Vasek 
+2019-10-24T16:24:33.393Vasek added textbook Book fdfs by qwer with isbn asdf
+2019-10-24T16:24:51.825Vasek 
+2019-10-24T16:30:17.840 Vasek checked textbooks.
+2019-10-24T16:30:18.122 Vasek checked instructors.
+2019-10-24T16:30:18.958 Vasek checked courses.

@@ -1,5 +1,8 @@
+package CourseConstructor;
 
-public class Course {
+import java.io.Serializable;
+
+public class Course implements Serializable{
 	private String courseName;
 	private Textbook textbook;
 	private Instructor instructor;
@@ -54,7 +57,7 @@ public class Course {
 	
 	public String toString()
 	{
-		return courseName + "\n" + instructor + "\n" + textbook;
+		return "Course: " + courseName + " lead by " + instructor + " " + textbook;
 	}
 	
 	public boolean equals(Object o)
