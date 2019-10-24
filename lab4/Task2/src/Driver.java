@@ -14,7 +14,12 @@ public class Driver {
 	{
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		BufferedWriter logs = new BufferedWriter(new FileWriter("src\\logs.txt", true));
+		BufferedWriter logs;
+		try {
+			logs = new BufferedWriter(new FileWriter("src\\logs.txt", true));
+		} catch (IOException e1) {
+			out.println("File log.txt does not exist!");
+		}
 		String choice;
 		try {choice = in.readLine();}
 		catch (IOException e) {
