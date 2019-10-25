@@ -21,9 +21,11 @@ public class CourseConstructor {
 			textbooks = (ArrayList<Textbook>)txtbks.readObject();
 			instructors = (ArrayList<Instructor>)insts.readObject();
 			courses = (ArrayList<Course>)crss.readObject();
+			//Считываем все объекты
 			txtbks.close();
 			insts.close();
 			crss.close();
+			//Не забываем закрывать потоки!!!
 		}
 		catch(Exception e)//Если не получилось, то создаем новые
 		{
@@ -52,7 +54,9 @@ public class CourseConstructor {
 	
 	
 	public void run() throws IOException
-	{
+	{//Я сделал throws *exception* во многих функциях, чтобы не прописывать try/catch
+		//При считывании или других потенциально опасных методах!
+		//Примеры таких будут дальше
 		out.println("Welcome to Course App by Jiklopo corp.!");
 		String choice;
 		out.println("Type:\n"
@@ -77,6 +81,7 @@ public class CourseConstructor {
 		out.println("Goodbye!");
 		out.close();
 		in.close();
+		//Всегда закрывайте потоки за собой.
 	}
 	
 	private void userMode() throws IOException
@@ -222,7 +227,7 @@ public class CourseConstructor {
 		deserialize();
 	}
 	
-	private void writeLogs(String logs) throws IOException
+	private void writeLogs(String logs) throws IOException//Здесь мы записываем логи
 	{
 		BufferedWriter logWriter = new BufferedWriter(new FileWriter("src\\resources\\logs.txt", true));
 		logWriter.write(logs + "\n");
@@ -230,18 +235,20 @@ public class CourseConstructor {
 	}
 	
 	private String deleteSmthn(Object[] list, String cls) throws NumberFormatException, IOException
-	{
+	{//Это, чтобы удалить что-нибудь откуда-нибудь
 		out.println("Choose a %s to delete:".format(cls));
 		listObjects(list);
 		int indexChoice = Integer.parseInt(in.readLine());
+		//Здесь может быть NumberFormatException, если попытаемся НЕ число запихать
 		String logs = "deleted " + textbooks.get(indexChoice);
 		textbooks.remove(indexChoice);
 		return logs;
 	}
 	
-	private void listObjects(Object[] list)
+	private void listObjects(Object[] list)//Это, чтобы вывести все из массива чего угодно
 	{
 		String line = "%x. %s";
+		//%x заменятеся на интегер, %s - на строку
 		for(int i = 0; i < list.length; i++)
 		{
 			out.println(line.format(line, i, list[i].toString()));
