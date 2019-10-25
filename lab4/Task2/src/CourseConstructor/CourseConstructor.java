@@ -3,18 +3,21 @@ package CourseConstructor;
 import java.io.*;
 import java.util.ArrayList;
 public class CourseConstructor {
-	private BufferedReader in;
-	private PrintWriter out;
+	private BufferedReader in;//Для ввода данных. 
+	//Используем BufferedReader, чтобы не по одному символу считывать, а сразу целую строку
+	private PrintWriter out;//для вывода
+	//Используем PrintWriter, чтобы на выводе были человекочитаемые) слова, а не машинный код
 	private ArrayList<Course> courses;
 	private ArrayList<Textbook> textbooks;
 	private ArrayList<Instructor> instructors;
 	
 	{
-		try
+		try//Попытка десериализовать, листы с предыдущих сессий
 		{
 			ObjectInputStream txtbks = new ObjectInputStream(new FileInputStream("src\\resources\\textbooks.out"));
 			ObjectInputStream insts = new ObjectInputStream(new FileInputStream("src\\resources\\instructors.out"));
 			ObjectInputStream crss = new ObjectInputStream(new FileInputStream("src\\resources\\courses.out"));
+			//Для ДЕсериализации нам нужны *OBJECT*InputStream, чтобы считывать *ОБЪЕКТЫ*
 			textbooks = (ArrayList<Textbook>)txtbks.readObject();
 			instructors = (ArrayList<Instructor>)insts.readObject();
 			courses = (ArrayList<Course>)crss.readObject();
@@ -22,7 +25,7 @@ public class CourseConstructor {
 			insts.close();
 			crss.close();
 		}
-		catch(Exception e)
+		catch(Exception e)//Если не получилось, то создаем новые
 		{
 			courses = new ArrayList<Course>();
 			textbooks = new ArrayList<Textbook>();
@@ -30,14 +33,19 @@ public class CourseConstructor {
 		}
 	}
 	
-	public CourseConstructor()
+	public CourseConstructor()//По умолчанию ввод и вывод из консоли, но не через Сканнер. Сканер - плохо
 	{		
 		in = new BufferedReader(new InputStreamReader(System.in));
 		out = new PrintWriter(System.out, true);
+		//Параметр true для того, чтобы автоматически использовалась функция flush()
+		//Эта функция нужна, чтобы сразу сделать вывод, без нее выйдет только перед закрытием потока
+		//out.close(); Вот тогда
+		//Она используется автоматически только при println();
+		//При print() flush() нужно писать самому(
 	}
 	
 	public CourseConstructor(BufferedReader in, PrintWriter out)
-	{
+	{//Можно сделать свой ввод и вывод, но я не пользовался этим
 		this.in = in;
 		this.out = out;
 	}
@@ -211,7 +219,7 @@ public class CourseConstructor {
 			catch(IOException e) {out.println("File logs.txt damaged or does not exist");}
 		}
 		
-		finish();
+		deserialize();
 	}
 	
 	private void writeLogs(String logs) throws IOException
@@ -240,17 +248,20 @@ public class CourseConstructor {
 		}
 	}
 	
-	private void finish() throws FileNotFoundException, IOException
+	private void deserialize() throws FileNotFoundException, IOException
 	{
 		ObjectOutputStream txtbks = new ObjectOutputStream(new FileOutputStream("src\\resources\\textbooks.out", false));
 		ObjectOutputStream insts = new ObjectOutputStream(new FileOutputStream("src\\resources\\instructors.out", false));
 		ObjectOutputStream crss = new ObjectOutputStream(new FileOutputStream("src\\resources\\courses.out", false));
+		//Сериализация и десериализация похожи, только вместо input - output.
 		txtbks.writeObject(textbooks);
 		insts.writeObject(instructors);
 		crss.writeObject(courses);
+		//Записываем все листы
 		txtbks.close();
 		insts.close();
 		crss.close();
+		//Не забываем закрыть потоки, а то ничего не сохранится
 	}
 	
 	private boolean checkLogin(String username, String password) throws FileNotFoundException, IOException
