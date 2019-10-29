@@ -7,20 +7,30 @@ public abstract class Vector {
 		D3,
 		D2
 	}
-
-	public abstract void dotProduct(Vector v);
 	
-	public abstract void crossProduct(Vector v);
+	public abstract double calculateLength();
+
+	public abstract double dotProduct(Vector v);
+	
+	public double dotProduct(double module, double angle)
+	{
+		return calculateLength() * module * Math.cos(angle);
+	}
+	
+	public abstract Vector crossProduct(Vector v);
 	
 	public abstract void addVector(Vector v);
 	
-	public double piffagor(double[] numbers)
+	public double piffagor(double x, double y, double z)
 	{
-		double res = 0;
-		for(double d: numbers)
-		{
-			res += d * d;
-		}
+		double res = x * x + y * y + z * z;
 		return Math.sqrt(res);
 	}
+	
+	public double piffagor(double x, double y)
+	{
+		return piffagor(x, y, 0);
+	}
+	
+	
 }

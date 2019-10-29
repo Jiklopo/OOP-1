@@ -7,7 +7,7 @@ public class Manager extends Employee {
 	private double bonus;
 	public Manager() 
 	{
-		// TODO Auto-generated constructor stub
+		bonus = 0;
 	}
 
 	public Manager(String name) {
@@ -68,8 +68,9 @@ public class Manager extends Employee {
 	
 	public int compareTo(Object o)
 	{
-		if(super.compareTo(o) != 0)
-			return super.compareTo(o);
+		int compRes = super.compareTo(o);
+		if(compRes != 0)
+			return compRes;
 		Manager m = (Manager)o;
 		if(bonus > m.bonus)
 			return 1;
