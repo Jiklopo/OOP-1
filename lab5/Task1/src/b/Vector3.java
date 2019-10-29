@@ -1,7 +1,5 @@
 package b;
 
-import b.Vector.dimension;
-
 public class Vector3 extends Vector {
 	private int x, y, z;
 	public Vector3()
@@ -11,5 +9,19 @@ public class Vector3 extends Vector {
 		y = 0;
 		z = 0;
 	}
-
+	@Override
+	public void dotProduct(Vector v) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void crossProduct(Vector v) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void addVector(Vector v) {
+		// TODO Auto-generated method stub
+		
+	}	
 }

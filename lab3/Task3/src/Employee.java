@@ -1,14 +1,15 @@
+import java.util.Date;
 
-public class Employee extends Person 
+public class Employee extends Person implements Comparable 
 {
 	private double salary;
-	private int yearStarted;
+	private Date hireDate;
 	private String insuranceNumber;
 	
 	public Employee()
 	{
 		super();
-		yearStarted = 2000;
+		hireDate = new Date();
 		salary = 1000;
 		insuranceNumber = "000000";
 	}
@@ -16,7 +17,7 @@ public class Employee extends Person
 	public Employee(String name)
 	{
 		super(name);
-		yearStarted = 2019;
+		hireDate = new Date();
 		salary = 20000;
 		insuranceNumber = "111111";
 	}
@@ -27,15 +28,15 @@ public class Employee extends Person
 		setSalary(salary);
 	}
 	
-	public Employee(String name, double salary, int yearStarted)
+	public Employee(String name, double salary, Date hireDate)
 	{
 		this(name, salary);
-		setYearStarted(yearStarted);
+		setHireDate(hireDate);
 	}
 	
-	public Employee(String name, double salary, int yearStarted, String insuranceNumber)
+	public Employee(String name, double salary, Date hireDate, String insuranceNumber)
 	{
-		this(name, salary, yearStarted);
+		this(name, salary, hireDate);
 		setInsuranceNumber(insuranceNumber);
 	}
 	
@@ -45,9 +46,9 @@ public class Employee extends Person
 		return insuranceNumber;
 	}
 	
-	public int getYearStarted()
+	public Date getHireDate()
 	{
-		return yearStarted;
+		return hireDate;
 	}
 	
 	public double getSalary()
@@ -60,9 +61,9 @@ public class Employee extends Person
 		this.salary = salary;
 	}
 	
-	public void setYearStarted(int yearStarted)
+	public void setHireDate(Date hireDate)
 	{
-		this.yearStarted = yearStarted;
+		this.hireDate = hireDate;
 	}
 	
 	public void setInsuranceNumber(String insuranceNumber)
@@ -79,7 +80,7 @@ public class Employee extends Person
 	{
 		int result = super.hashCode();
 		result = (int) (result * 31 + salary);
-		result = result * 31 + yearStarted;
+		result = result * 31 + hireDate.hashCode();
 		result = result * 31 + insuranceNumber.hashCode();
 		return result;
 	}
@@ -93,5 +94,15 @@ public class Employee extends Person
 		
 		Employee e = (Employee) o;
 		return (e.salary == salary) && (e.insuranceNumber.equals(insuranceNumber));
+	}
+
+	
+	public int compareTo(Object o) {
+		Employee e = (Employee)o;
+		if(this.salary > e.salary)
+			return 1;
+		else if(this.salary < e.salary)
+			return -1;
+		return 0;
 	}
 }
