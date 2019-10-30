@@ -1,4 +1,4 @@
-package b;
+package a;
 
 public class Vector2 extends Vector {
 	private int x, y;

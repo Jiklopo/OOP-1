@@ -1,4 +1,4 @@
-package b;
+package a;
 
 public abstract class Vector {
 	int dim;

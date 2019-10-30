@@ -1,4 +1,7 @@
 package b;
+
+import a.Vector;
+
 public interface Moveable
 {
 	double g = 9.8;
