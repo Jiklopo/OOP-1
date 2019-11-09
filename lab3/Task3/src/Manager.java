@@ -74,7 +74,7 @@ public class Manager extends Employee {
 		Manager m = (Manager)o;
 		if(bonus > m.bonus)
 			return 1;
-		else if(bonus < m.bonus)
+		if(bonus < m.bonus)
 			return -1;
 		return 0;
 	}

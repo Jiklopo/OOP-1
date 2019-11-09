@@ -6,7 +6,7 @@ public class MinMax {
 	{
 		private int min, max;
 		
-		private MinMaxPair()
+		public MinMaxPair()
 		{
 			max = Integer.MIN_VALUE;
 			min = Integer.MAX_VALUE;
