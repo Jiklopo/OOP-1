@@ -1,5 +1,5 @@
 
-public class Time {
+public class Time implements Comparable{
 	private int hour, min, sec;
 	
 	Time (int hour, int min, int sec){
@@ -46,5 +46,25 @@ public class Time {
 		if(i < 10)
 			return "0" + i;
 		return i + "";
+	}
+	
+	public String toString()
+	{
+		return toUniversal();
+	}
+	
+	public int compareTo(Object o)
+	{
+		Time other = (Time)o;
+		int res = this.hour - other.hour;
+		if(res == 0)
+		{
+			res = this.min - other.min;
+			if(res == 0)
+			{
+				res = this.sec - other.sec;
+			}
+		}
+		return res;
 	}
 }
