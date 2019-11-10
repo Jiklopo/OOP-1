@@ -1,14 +1,46 @@
+package bank;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
-public abstract class Account {
-	public static ArrayList<Boolean> createdAccNumbers = new ArrayList<Boolean>();
+
+public class Account implements Serializable{
+	public static ArrayList<Boolean> createdAccNumbers;
 	protected String holderName;
 	protected int accNumber;
 	protected float balance;
 	protected boolean isCredit;
+	private int numberOfTransactions;
+	protected final int FREE_TRANSACTIONS = 100;
+	
+	static
+	{
+		try
+		{
+			ObjectInputStream deserializer = new ObjectInputStream(new FileInputStream("resources\\createdAccounts.out"));
+			createdAccNumbers = (ArrayList<Boolean>) deserializer.readObject();
+			deserializer.close();
+		}
+		
+		catch(Exception e)
+		{
+			createdAccNumbers = new ArrayList<Boolean>();
+		}
+	}
 	
 	{
 		accNumber = createdAccNumbers.size();
-		createdAccNumbers.set(accNumber, true);		
+		createdAccNumbers.set(accNumber, true);
+		numberOfTransactions = 0;
+		try
+		{
+			ObjectOutputStream serializer = new ObjectOutputStream(new FileOutputStream("resources\\createdAccounts.out"));
+			serializer.writeObject(createdAccNumbers);
+			serializer.close();
+		}
+		catch(Exception e) {}
 	}
 	
 	//Constructors
@@ -19,21 +51,20 @@ public abstract class Account {
 		isCredit = false;
 	}
 	
+	public Account(int accountNumber)
+	{
+		this.accNumber = accountNumber;
+	}
+	
 	public Account(String holderName)
 	{
 		super();
 		this.holderName = holderName;
 	}
 	
-	public Account(String holderName, float balance)
+	public Account(String holderName, boolean isCredit)
 	{
 		this(holderName);
-		this.balance = balance;
-	}
-	
-	public Account(String holderName, float balance, boolean isCredit)
-	{
-		this(holderName, balance);
 		this.isCredit = isCredit;
 	}
 	
@@ -45,7 +76,7 @@ public abstract class Account {
 	
 	public boolean withdraw(float withdrawal)
 	{
-		if(balance - withdrawal > 0 || isCredit)
+		if(balance - withdrawal > 5 || isCredit)
 		{
 			balance -= withdrawal;
 			return true;
@@ -57,12 +88,17 @@ public abstract class Account {
 	{
 		if(withdraw(amount))
 		{
+			numberOfTransactions++;
 			target.deposit(amount);
 			return true;
 		}
 		return false;
 	}
 	
+	public final void print()
+	{
+		System.out.println(toString());
+	}
 	
 	//Getters and Setters
 	public String getHolderName() {
@@ -84,7 +120,11 @@ public abstract class Account {
 	public void setBalance(float balance) {
 		this.balance = balance;
 	}
-
+	
+	public int getNumberOfTransactions()
+	{
+		return numberOfTransactions;
+	}
 	
 	
 	//Overriden methods
@@ -93,7 +133,7 @@ public abstract class Account {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + accNumber;
-		result = prime * result + Float.floatToIntBits(balance);
+		result = prime * result + (int)(balance);
 		result = prime * result + ((holderName == null) ? 0 : holderName.hashCode());
 		result = prime * result + (isCredit ? 1231 : 1237);
 		return result;
