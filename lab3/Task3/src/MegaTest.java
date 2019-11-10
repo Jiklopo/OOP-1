@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.Date;
 import java.util.Vector;
 public class MegaTest {
@@ -9,7 +10,7 @@ public class MegaTest {
 		Vector<Employee> es3 = new Vector<Employee>(5);
 		for(int i = 0; i < 5; i++)
 		{
-			es1.add(new Employee(names[i], 2000.0 - (i * 23) * 1000, new Date(), "00000" + i));
+			es1.add(new Employee(names[i], 2000.0 - (i * 23), new Date(), "00000" + i));
 			es2.add(new Employee(names[i], 2000.0 - (i * 71), new Date(), "00000" + i));
 			es3.add(new Employee(names[i], 4000.0 - (i * 43), new Date(), "11111" + i));
 		}
@@ -18,8 +19,17 @@ public class MegaTest {
 		Manager m2 = new Manager("Lena", 3500, new Date(), "123456", es2);
 		Manager m3 = new Manager("Manya", 3500, new Date(), "123456", es1);
 		
-		System.out.println(m1 + "\n\n" + m2 + "\n\n" + m3);
-		System.out.println(m1.equals(m2) + "\n" + m1.equals(m3));
+		Collections.sort(es1, Employee.getCompareBySalary());
+		Collections.sort(es2, Employee.getCompareByName());
+		for(Employee e: es1)
+		{
+			System.out.println(e);
+		}
+		System.out.println();
+		for(Employee e: es2)
+		{
+			System.out.println(e);
+		}
 	}
 
 }

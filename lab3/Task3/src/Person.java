@@ -1,5 +1,5 @@
 
-public class Person {
+public class Person implements Cloneable{
 	private String name;
 	
 	public Person()
@@ -42,5 +42,10 @@ public class Person {
 	public int hashCode()
 	{
 		return 17 + name.hashCode();
+	}
+	
+	public Person clone() throws CloneNotSupportedException
+	{
+		return (Person)super.clone();
 	}
 }

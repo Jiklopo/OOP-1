@@ -78,4 +78,15 @@ public class Manager extends Employee {
 			return -1;
 		return 0;
 	}
+	
+	public Manager clone()
+	{
+		Manager cloned = new Manager();
+		cloned.employees = (Vector<Employee>) employees.clone();
+		cloned.bonus = bonus;
+		cloned.hireDate = (Date)hireDate.clone();
+		cloned.insuranceNumber = new String(insuranceNumber);
+		cloned.salary = salary;
+		return cloned;
+	}
 }

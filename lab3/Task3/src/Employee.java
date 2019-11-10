@@ -1,11 +1,18 @@
+import java.util.Comparator;
 import java.util.Date;
 
-public class Employee extends Person implements Comparable 
+public class Employee extends Person implements Comparable, Cloneable
 {
-	private double salary;
-	private Date hireDate;
-	private String insuranceNumber;
+	//Fields
+	protected double salary;
+	protected Date hireDate;
+	protected String insuranceNumber;
 	
+	private static Comparator<Employee> compareByName = Comparator.comparing(Employee::getName);
+	private static Comparator<Employee> compareBySalary = Comparator.comparing(Employee::getSalary);
+	
+	
+	//Constructors
 	public Employee()
 	{
 		super();
@@ -41,14 +48,25 @@ public class Employee extends Person implements Comparable
 	}
 	
 	
+	//Getters and Setters
 	public String getInsuranceNumber()
 	{
 		return insuranceNumber;
 	}
 	
+	public void setInsuranceNumber(String insuranceNumber)
+	{
+		this.insuranceNumber = insuranceNumber;
+	}
+	
 	public Date getHireDate()
 	{
 		return hireDate;
+	}
+	
+	public void setHireDate(Date hireDate)
+	{
+		this.hireDate = hireDate;
 	}
 	
 	public double getSalary()
@@ -61,16 +79,17 @@ public class Employee extends Person implements Comparable
 		this.salary = salary;
 	}
 	
-	public void setHireDate(Date hireDate)
+	public static Comparator<Employee> getCompareByName()
 	{
-		this.hireDate = hireDate;
+		return compareByName;
 	}
 	
-	public void setInsuranceNumber(String insuranceNumber)
+	public static Comparator<Employee> getCompareBySalary()
 	{
-		this.insuranceNumber = insuranceNumber;
+		return compareBySalary;
 	}
 	
+	//Overriden Methods
 	public String toString()
 	{
 		return "I'am an Employee\n" + super.toString() + " and I get " + salary + "$ per year.";
@@ -96,7 +115,6 @@ public class Employee extends Person implements Comparable
 		return (e.salary == salary) && (e.insuranceNumber.equals(insuranceNumber));
 	}
 
-	
 	public int compareTo(Object o) {
 		Employee e = (Employee)o;
 		if(this.salary > e.salary)
@@ -104,5 +122,13 @@ public class Employee extends Person implements Comparable
 		else if(this.salary < e.salary)
 			return -1;
 		return 0;
+	}
+	
+	public Employee clone() throws CloneNotSupportedException
+	{
+		Employee cloned = (Employee)super.clone();
+		cloned.hireDate = (Date)hireDate.clone();
+		cloned.insuranceNumber = new String(insuranceNumber);
+		return cloned;
 	}
 }
