@@ -19,8 +19,8 @@ public class MegaTest {
 		Manager m2 = new Manager("Lena", 3500, new Date(), "123456", es2);
 		Manager m3 = new Manager("Manya", 3500, new Date(), "123456", es1);
 		
-		Collections.sort(es1, Employee.getCompareBySalary());
-		Collections.sort(es2, Employee.getCompareByName());
+		Collections.sort(es1, Employee.compareByName);
+		Collections.sort(es2, Employee.compareBySalary);
 		for(Employee e: es1)
 		{
 			System.out.println(e);

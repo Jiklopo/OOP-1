@@ -17,5 +17,12 @@ public class Parallel extends Connection{
 		double r2 = circuit2.getResistance();
 		return (r1 * r2)/(r1 + r2);
 	}
+	
+	@Override
+	public void applyVoltage(double v)
+	{
+		circuit1.applyVoltage(v);
+		circuit2.applyVoltage(v);
+	}
 
 }

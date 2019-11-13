@@ -32,7 +32,8 @@ public class Account implements Serializable{
 	
 	{
 		accNumber = createdAccNumbers.size();
-		createdAccNumbers.set(accNumber, true);
+		//createdAccNumbers.ensureCapacity(accNumber + 1);
+		createdAccNumbers.add(true);
 		numberOfTransactions = 0;
 		try
 		{

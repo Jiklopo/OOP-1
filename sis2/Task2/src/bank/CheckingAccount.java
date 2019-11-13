@@ -26,12 +26,7 @@ public class CheckingAccount extends Account {
 	
 	private boolean deductFee()
 	{
-		if(balance > 0 || isCredit)
-		{
-			balance -= transferCharge;
-			return true;
-		}
-		return false;
+		return withdraw(transferCharge);
 	}
 	
 }

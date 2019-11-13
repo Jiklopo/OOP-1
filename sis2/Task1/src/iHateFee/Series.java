@@ -16,4 +16,11 @@ public class Series extends Connection {
 		return circuit1.getResistance() + circuit2.getResistance();
 	}
 
+	public void applyVoltage(double v)
+	{		
+		double r1 = circuit1.getResistance();
+		double r2 = circuit2.getResistance();
+		circuit1.applyVoltage((r1/getResistance() * getVoltage()));
+		circuit2.applyVoltage((r2/getResistance() * getVoltage()));
+	}
 }

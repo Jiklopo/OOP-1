@@ -48,6 +48,14 @@ public class Bank {
 		}
 	}
 	
+	public void showAll()
+	{
+		for(Account ac: accounts)
+		{
+			System.out.println(ac);
+		}
+	}
+	
 	
 	//Universal method for adding accounts
 	//Maybe way too universal

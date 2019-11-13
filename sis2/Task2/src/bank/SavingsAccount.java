@@ -27,8 +27,7 @@ public class SavingsAccount extends Account
 	//Methods
 	public void addInterest()
 	{
-		if(balance > 0)
-			balance += balance * interestRate;
+		deposit(balance * interestRate);
 	}
 	
 	//Overriden Methods

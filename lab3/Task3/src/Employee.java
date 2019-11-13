@@ -8,8 +8,8 @@ public class Employee extends Person implements Comparable, Cloneable
 	protected Date hireDate;
 	protected String insuranceNumber;
 	
-	private static Comparator<Employee> compareByName = Comparator.comparing(Employee::getName);
-	private static Comparator<Employee> compareBySalary = Comparator.comparing(Employee::getSalary);
+	public static final Comparator<Employee> compareByName = Comparator.comparing(Employee::getName);
+	public static final Comparator<Employee> compareBySalary = Comparator.comparing(Employee::getSalary);
 	
 	
 	//Constructors
@@ -77,16 +77,6 @@ public class Employee extends Person implements Comparable, Cloneable
 	public void setSalary(double salary)
 	{
 		this.salary = salary;
-	}
-	
-	public static Comparator<Employee> getCompareByName()
-	{
-		return compareByName;
-	}
-	
-	public static Comparator<Employee> getCompareBySalary()
-	{
-		return compareBySalary;
 	}
 	
 	//Overriden Methods
