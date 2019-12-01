@@ -50,7 +50,7 @@ public abstract class User implements Comparable, Serializable {
 	/**
 	 * Automatically creates id number
 	 */	
-	private User()
+	public User()
 	{
 		id = GregorianCalendar.getInstance().get(Calendar.YEAR)%1000
 				+ "SKY" + allUsers.size();		

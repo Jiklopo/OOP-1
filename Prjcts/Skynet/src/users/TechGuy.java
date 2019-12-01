@@ -7,34 +7,39 @@ import java.util.Queue;
 /**
  */
 public class TechGuy extends User {
-    /**
-     */
-    private static Queue<String> orders;
+	public TechGuy(String password, String firstName, String lastName, String phoneNumber) {
+		super(password, firstName, lastName, phoneNumber);
+		// TODO Auto-generated constructor stub
+	}
 
-    /**
-     */
-    private String currentOrder;
+	/**
+	 */
+	private static Queue<String> orders;
 
-    /**
-     */
-    private int ordersDone;
+	/**
+	 */
+	private String currentOrder;
 
-    /**
-     * @param order 
-     * @return 
-     */
-    public static boolean receiveOrder(String order) {
-        return false;
-    }
+	/**
+	 */
+	private int ordersDone;
 
-    /**
-     */
-    public void takeOrder() {
-    }
+	/**
+	 * @param order 
+	 * @return 
+	 */
+	public static boolean receiveOrder(String order) {
+		return false;
+	}
 
-    /**
-     */
-    public void finishOrder() {
-    }
+	/**
+	 */
+	public void takeOrder() {
+	}
+
+	/**
+	 */
+	public void finishOrder() {
+	}
 }
 

@@ -17,11 +17,8 @@ public CourseFile(String path, Teacher owner, Course course) {
 }
 //get/set
 public String getPath() { return this.path; }
-public void setPath(String path) { this.path=path; }
 public Teacher getOwner() { return this.owner; }
-public void setOwner(Teacher anotherTeacher) { this.owner = anotherTeacher; }
 public Course getCourse() { return this.course; }
-public void setCourse(Course anotherCourse) { this.course = anotherCourse; }
 
 public static void serialize(HashSet<CourseFile> allFiles) throws IOException{
 	FileOutputStream fos = new FileOutputStream("courseFiles.out");
