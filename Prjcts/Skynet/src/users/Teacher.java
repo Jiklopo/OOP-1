@@ -1,51 +1,90 @@
 package users;
-
-import java.lang.*;
 import java.util.*;
+import java.lang.*;
 import universityStuff.*;
-
-/**
- */
 public class Teacher extends Employee {
-    /**
-     */
-    private HashSet<Course> courses;
+	//fields
+private HashSet<Course> courses;
+private HashSet<Subject> subjects;
 
-    /**
-     */
-    private HashSet<Subject> subjects;
+private HashSet<Student> students;
+private String name;
+private String surname;
+private String faculty;
 
-    /**
-     * @param student 
-     * @param subject 
-     * @param grade 
-     * @param attestationPeriod 
-     */
-    public void putMark(Subject subject, Student student, float grade, String attestationPeriod) {
+
+public Teacher(String password, String firstName, String lastName, String phoneNumber) {
+	super(password, firstName, lastName, phoneNumber);
+}
+//get/set
+public String getName() { return this.name; }
+public String getSurname() { return this.surname; }
+public String getFaculty() { return this.faculty; }
+public void setFaculty(String faculty) { this.faculty = faculty; }
+
+//methods
+public void putMark(Subject subject, Student student, float grade, String attestationPeriod) {
+	
+	for(Course c:courses) {
+		for(Subject sub:subjects) {
+		   for(Student s:students) {
+			if(student.getName()== s.Name) {
+				Mark m = new Mark(firstAttestation, secondAttestation, finalGrade);
+				if(attestationPeriod.equals("First attestation")) {
+					m.setFirstAttestation(grade);
+				}
+				else if(attestationPeriod.equals("SecondAttestation")) {
+					m.setSecondAttestation(grade);
+				}
+				else if(attestationPeriod.equals("Final")) {
+					m.setFinalGrade(grade);
+				}
+			}
+		}
+	}
+}
+}
+public void markAttendance(Subject subject, Student student, Date date, boolean attendance) {
+	for(Student s: students) {
+		for(Subject sub:subjects) {
+			if(student.getName()==s.Name)
+				s.markAttendance(date,attendance);
+		}
+	}
+	
+}
+public void addCourseFile(CourseFile file) {
+	courses.add(file);
+}
+
+public String viewStudentInfo() {
+	String res = "";
+	for(Student s: students) {
+		res += s.toString() + "\n";
+	}
+	return res;
+}
+public void viewCourses(){
+    int i = 1;
+    for(Course c : courses){
+        System.out.println(i + "." + c);
+        i++;
     }
+}
 
-    /**
-     * @param date 
-     * @param student 
-     * @param subject 
-     * @param attendance 
-     */
-    public void markAttendance(Subject subject, Student student, Date date, boolean attendance) {
-    }
+//equals/hashcode/toString
+public boolean equals(Object obj) { 
+	return super.equals(obj);
+}
 
-    /**
-     * @param file 
-     * @return 
-     */
-    public boolean addCourseFile(File file) {
-        return false;
-    }
+public int hashCode() { 
+	return super.hashCode(); 
+	}
+}
 
-    /**
-     * @return 
-     */
-    public String viewStudentInfo() {
-        return null;
-    }
+public String toString() {
+	return " Teacher: " + this.surname + " " + this.name + " " +this.faculty + "\""
+			+ "Courses:" + this.courses + " " + "subjects" + this.subjects;
+}
 }
 

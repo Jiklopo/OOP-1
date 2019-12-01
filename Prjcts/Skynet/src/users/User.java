@@ -10,9 +10,9 @@ import java.io.*;
 public abstract class User implements Comparable, Serializable {
 	//Fields
 	/**
-	 * This set contains all users that have been created
+	 * This map contains all users that have been created and hashCodes for their passwords
 	*/
-	protected static HashSet<User> allUsers;
+	protected static HashMap<User, Integer> allUsers;
 
 
 	/**
@@ -36,6 +36,7 @@ public abstract class User implements Comparable, Serializable {
 	*/
 	protected String id;
 	/**
+	 * Comparator used to sort user by id
 	*/
 	public static final Comparator<User> COMPARE_BY_ID = Comparator.comparing(User::getId);
 	/**
@@ -55,13 +56,13 @@ public abstract class User implements Comparable, Serializable {
 				+ "SKY" + allUsers.size();		
 	}
 
-
-	public User(String firstName, String lastName, String phoneNumber) {
+	public User(String password, String firstName, String lastName, String phoneNumber) {
 		this();
 		login = generateLogin(firstName, lastName);
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
+		allUsers.put(this, password.hashCode());
 	}
 	
 	/**
@@ -71,7 +72,7 @@ public abstract class User implements Comparable, Serializable {
 	 */
 	public boolean isLoginOccupied(String login)
 	{
-		for(User u: allUsers)
+		for(User u: allUsers.keySet())
 		{
 			if(u.login.equals(login))
 				return true;
@@ -85,7 +86,7 @@ public abstract class User implements Comparable, Serializable {
 	private String generateLogin(String firstName, String lastName)
 	{
 		int charsFromName = 1, delimNumber = 0;
-		char[] delimiters = {'_', '.', '-'};
+		char[] delimiters = {'_', '-', '.', ':'};
 		String login = null;
 		do{
 			login = firstName.substring(0, charsFromName) + 
@@ -139,7 +140,7 @@ public abstract class User implements Comparable, Serializable {
 	public static void deserializeAllUsers() throws IOException, FileNotFoundException, ClassNotFoundException
 	{
 		ObjectInputStream reader = new ObjectInputStream(new FileInputStream(serializationPath));
-		allUsers = (HashSet<User>)reader.readObject();
+		allUsers = (HashMap<User, Integer>)reader.readObject();
 		reader.close();
 	}
 
@@ -198,13 +199,13 @@ public abstract class User implements Comparable, Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return other.login.equals(this.login);
+		return login.equals(other.login);
 	}
 	
 	@Override
 	public int compareTo(Object o)
 	{
 		User u = (User)o;
-		return this.firstName.compareTo(u.firstName);
+		return firstName.compareTo(u.firstName);
 	}
 }
