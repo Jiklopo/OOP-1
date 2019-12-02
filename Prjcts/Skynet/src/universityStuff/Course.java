@@ -10,6 +10,7 @@ private String name;
 private String description; 
 private Vector<Teacher> teachers; 
 private HashSet<Course> prerequisites;
+private HashSet<CourseFile> courseFiles;
 //constructors
 public Course(String code, String name, String description) {
 	this.code=code;
@@ -31,30 +32,14 @@ public HashSet<Course> getPrerequisites() { return this.prerequisites; }
 public void addPrerequisite(Course c) {
     this.prerequisites.add(c);
 }
-/*
-public void serialize() {
-	try {
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("courses.txt"));
-        allCourses = (HashSet<Course>) ois.readObject();
-        ois.close();
-    }
-    catch (IOException e) {
-        System.out.println("Exception caught");
-    }
-}
 
-public void deserialize() {
-	try {
-        ObjectOutputStream oot = new ObjectOutputStream(new FileOutputStream("courses.txt"));
-        oot.writeObject(allCourses);
-        oot.flush();
-        oot.close();
-    }
-    catch (IOException e) {
-        System.out.println("Exception caught");
-    }
+public void addFile(CourseFile courseFile) 
+{
+	courseFiles.add(courseFile); 
 }
-*/
+public void deleteFile (CourseFile courseFile) throws IOException{
+	courseFiles.remove(courseFile);
+}
 
 public static void serialize(HashSet<Course> allCourses) throws IOException {
 	FileOutputStream fos = new FileOutputStream("courses.out");
@@ -84,18 +69,12 @@ public int hashCode() {
 }
 public int compareTo(Object o) {
 	Course c = (Course)o;
-	if(this.name.equals(c.getName())) return 0;
-	else {
-		if(c.getName().equals(this.name)>0) return -1;
-	}
-	else {
-		return 1;
-	}
+	return name.compareTo(c.name);
 }
 public String viewCourseInfo() {
-	return "Course is: " + this.name + "\"
-			+ "code is: " + this.code+ "\""
-					+ "prerequisites are: " + this.prerequisites + "\""
+	return "Course is: " + this.name + "\n"
+			+ "code is: " + this.code+ "\n"
+					+ "prerequisites are: " + this.prerequisites + "\n"
 							+ "description: "  + this.description;
    }
 }

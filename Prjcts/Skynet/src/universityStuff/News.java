@@ -1,8 +1,7 @@
 package universityStuff;
-import java.lang.*;
-import java.util.*;
-import universityStuff.*;
-import HashSet<Users.User>;
+
+import java.util.Date;
+import java.util.Vector;
 /**
 */
 public class News {

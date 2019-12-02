@@ -88,13 +88,6 @@ public class Admin extends User {
 		return true;
 	}
 	/**
-	 * @param log 
-	 * @return 
-	 */
-	private boolean log(String log) {
-		return true;
-	}
-	/**
 	 * @return 
 	 */
 	public String viewUsers() {

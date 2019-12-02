@@ -1,40 +1,41 @@
-import java.lang.*;
-
+package skynet;
 /**
+ * 
+ * @author Jiklopo
+ *
  */
-public abstract class Skynet {
+public interface Skynet {
     /**
      * @param password 
      * @param login 
      * @return 
      */
-    public boolean checkLogin(String login, String password) {
-        return false;
-    }
+    boolean checkLogin(String login, String password);
 
     /**
      */
-    public void userLogin() {
-    }
+    void userLogin();
 
     /**
      */
-    protected void studentLogin() {
-    }
+    void studentLogin();
 
     /**
      */
-    protected void teacherLogin() {
-    }
+    void teacherLogin();
 
     /**
      */
-    protected void managerLogin() {
-    }
+    void managerLogin();
 
     /**
      */
-    protected void adminLogin() {
-    }
+    void adminLogin();
+    
+    /**
+     * 
+     * @param logs
+     */
+    void writeLogs(String logs);
 }
 
