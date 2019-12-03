@@ -1,17 +1,15 @@
 package universityStuff;
 
 import java.util.*;
+import java.io.*;
+
 
 /**
  */
-public class Transcript implements Serializable, Comparable{
+public class Transcript implements Serializable{
 	
 	public Transcript() {
 		marks = new HashMap<Subject, Mark>();
-	}
-	
-	public Transcript() {
-		
 	}
 	
     /**
@@ -25,26 +23,27 @@ public class Transcript implements Serializable, Comparable{
     public boolean writeTranscript(Map marks) {
         return false;
     }
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((marks == null) ? 0 : marks.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Transcript t = (Transcript) obj;
+		return marks.equals(t.marks);
+	}
     
-    public boolean equals(Object o) {
-    	Transcript t = (Transcript) o;
-    	if(this == t) return true;
-    	
-    	if(!(this instanceof t)) return false;
-    	return this.marks.equals(t.marks);
-    }
     
-    public int compareTo(Object o) {
-    	Transcript t = (Transcript) o;
-    	if(subject != t.subject) return -1;
-    	if(subject == t.subject)
-    		return this.getCourse().getName().compareTo(t.getCourse().getName());
-    }
-    
-    public int hashCode() {
-    	int result = 37;
-    	result = result + marks.hashCode();
-    	result = result + writeTranscript.hashCode();
-    }
 }
 

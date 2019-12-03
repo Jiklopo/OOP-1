@@ -10,7 +10,7 @@ public class Student extends User {
 	
 	public Student() {
 		transcript = new Transcript();
-		journal = new AttendanceJournal();
+		journal = new HashMap<Subject, AttendanceJournal>();
 		timeTable = new TimeTable();
 	}
 
@@ -24,7 +24,7 @@ public class Student extends User {
 	private Transcript transcript;
 	/**
 	 */
-	private AttendanceJournal journal;
+	private HashMap<Subject, AttendanceJournal> journal;
 	/**
 	 */
 	private int year;
@@ -41,9 +41,33 @@ public class Student extends User {
 	 */
 	public void receiveMark(float grade, String attestationPeriod) {
 	}
+	public Transcript getTranscript() {
+		return transcript;
+	}
+
+	public HashMap<Subject, AttendanceJournal> getJournal() {
+		return journal;
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public TimeTable getTimeTable() {
+		return timeTable;
+	}
+
+	public HashMap<Subject, Mark> getCurrentSubjects() {
+		return currentSubjects;
+	}
+
 	/**
+	 * @param attendance 
+	 * @param date 
+	 * @param subject 
 	 */
-	public void receiveAttendence() {
+	public void receiveAttendence(Subject subject, Date date, boolean attendance) {
+		journal.get(subject).markAttendance(date, attendance);
 	}
 
 	public int hashCode() {
@@ -55,11 +79,6 @@ public class Student extends User {
 		result = result * 37 + currentSubjects.hashCode();
 		return result;
 	}
-
-	/**
-	 * @return 
-	 */
-	public void throws IOException deserializeIDs() {
-		return null;
-	}
+	
+	
 }

@@ -1,14 +1,15 @@
 package universityStuff;
 
+import java.io.*;
 /**
  */
 public class Mark implements Serializable, Comparable {
 	
-	public Mark(char mark, float firstAttestation, float secondAttestation, float finalGrade) {
-		this.mark = 'U';
-		this.firstAttestation = 0;
-		this.secondAttestation = 0;
-		this.finalGrade = 0;
+	public Mark(String mark, float firstAttestation, float secondAttestation, float finalGrade) {
+		this.mark = "Undefined";
+		this.firstAttestation = -1;
+		this.secondAttestation = -1;
+		this.finalGrade = -1;
 	    // TODO Auto-generated constructor stub
 	 }
 	
@@ -18,7 +19,7 @@ public class Mark implements Serializable, Comparable {
 	
     /**
      */
-    private char mark;
+    private String mark;
 
     /**
      */
@@ -35,19 +36,11 @@ public class Mark implements Serializable, Comparable {
     /**
      * @return 
      */
-    public String getMark() {
-        return mark;
-    }
 
-    /**
-     * @return 
-     */
-    public float getGrade() {
-        return firstAttestation + secondAttestation + finalGrade;
-    }
     
     
-    private void calculateMark() {
+    
+    public void calculateMark() {
     	if(getGrade() < 50) mark = "F";
     	else if(getGrade() >= 50 && getGrade() < 55) mark = "D";
     	else if(getGrade() >= 55 && getGrade() < 60) mark = "D+";
@@ -61,46 +54,76 @@ public class Mark implements Serializable, Comparable {
     	else if(getGrade() >= 95 && getGrade() <= 100) mark = "A+";
     }
     
-
     /**
-     * @param firstAttestation 
+     * @return 
      */
-    public void setFirstAttestation(float firstAttestation) {
-    }
-
-    /**
-     * @param secondAttestation 
-     */
-    public void setSecondAttestation(float secondAttestation) {
-    }
-
-    /**
-     * @param finalGrade 
-     */
-    public void setFinalGrade(float finalGrade) {
-    }
+    public float getGrade() {
+        return firstAttestation + secondAttestation + finalGrade;
+    }    
     
-    public boolean equals(Object o) {
-    	Mark m = (Mark) o;
-    	if(this == m) return true;
-    	
-    	if(!(this instanceof m)) return false;
-    	return this.mark.equals(m.mark);
-    }
+    public float getFirstAttestation() {
+		return firstAttestation;
+	}
+
+	public void setFirstAttestation(float firstAttestation) {
+		this.firstAttestation = firstAttestation;
+	}
+
+	public float getSecondAttestation() {
+		return secondAttestation;
+	}
+
+	public void setSecondAttestation(float secondAttestation) {
+		this.secondAttestation = secondAttestation;
+	}
+
+	public float getFinalGrade() {
+		return finalGrade;
+	}
+
+	public void setFinalGrade(float finalGrade) {
+		this.finalGrade = finalGrade;
+		calculateMark();
+	}
+
+	public String getMark() 
+	{
+		return mark;
+	}
     
     public int compareTo(Object o) {
     	Mark m = (Mark) o;
-    	return getGrade() - m.getGrade();
+    	return (int) (getGrade() - m.getGrade());
     }
-    
-    public int hashCode() {
-    	int result = 37;
-    	result = result + mark.hashCode();
-    	result = result + firstAttestation.hashCode();
-    	result = result + secondAttestation.hashCode();
-    	result = result + finalGrade.hashCode();
-    	result = result + getMark.hashCode();
-    	result = result + getGrade.hashCode();
-    }
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Float.floatToIntBits(finalGrade);
+		result = prime * result + Float.floatToIntBits(firstAttestation);
+		result = prime * result + ((mark == null) ? 0 : mark.hashCode());
+		result = prime * result + Float.floatToIntBits(secondAttestation);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Mark other = (Mark) obj;
+		return getGrade() == other.getGrade();
+	}
+	
+	@Override
+	public String toString() {
+		return "First attestation: " + firstAttestation + "\n"
+				+ "Second attestation: " + secondAttestation + "\n"
+				+ "Final grade: " + finalGrade;
+	}
 }
 

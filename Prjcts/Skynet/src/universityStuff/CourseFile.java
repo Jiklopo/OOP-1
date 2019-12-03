@@ -38,7 +38,7 @@ public boolean equals(Object o) {
   if (o == this) return true;
   if(!(o instanceof CourseFile)) return false;
   CourseFile c = (CourseFile) o;
-  return (this.path.equals(c.path) && this.course.equals(c.course) && this.owner.equals(c.owner);
+  return (this.path.equals(c.path) && this.course.equals(c.course) && this.owner.equals(c.owner));
 }
 public int hashCode() {
 	 int res = 12;

@@ -1,58 +1,57 @@
 package universityStuff;
 
 import java.util.*;
+import java.io.*;
 import universityStuff.*;
 
 /**
  */
 public class AttendanceJournal implements Serializable, Comparable{
-	
+
 	public AttendanceJournal(Subject subject) {
 		journal = new HashMap<Date, Boolean>();
 		this.subject = subject;
-		
-	    // TODO Auto-generated constructor stub
-	 }
-	
-	public AttendanceJournal() {
-		
+
+		// TODO Auto-generated constructor stub
 	}
-    /**
-     */
-    private Subject subject;
 
-    /**
-     */
-    private HashMap<Date, Boolean> journal;
+	public AttendanceJournal() {}
+	/**
+	 */
+	private Subject subject;
 
-    /**
-     * @param date 
-     * @param attendance 
-     */
-    public void markAttendance(Date date, boolean attendance) {
-    	journal[date] = attendance;
-    }
+	/**
+	 */
+	private HashMap<Date, Boolean> journal;
 
-    /**
-     * @param attendance 
-     */
-    public void markTodaysAttendance(boolean attendance) {
-    }
-    
-    public boolean equals(Object o) {
-    	Journal j = (Journal) o;
-    	if(this == j) return true;
-    	
-    	if(!(this instanceof j)) return false;
-    	return this.subject.equals(j.subject);
-    }
-    
-    public int compareTo(Object o) {
+	/**
+	 * @param date 
+	 * @param attendance 
+	 */
+	public void markAttendance(Date date, boolean attendance) {
+		journal.put(date, attendance);
+	}
+
+	/**
+	 * @param attendance 
+	 */
+	public void markTodaysAttendance(boolean attendance) {
+	}
+
+	public boolean equals(Object o) {
+		AttendanceJournal j = (AttendanceJournal) o;
+		if(this == j) return true;
+
+		if(!(this instanceof AttendanceJournal)) return false;
+		return this.subject.equals(j.subject);
+	}
+
+	public int compareTo(Object o) {
 		AttendanceJournal aj = (AttendanceJournal) o;
 		return this.subject.compareTo(aj.subject);
 	}
-    
-    public int hashCode()
+
+	public int hashCode()
 	{
 		int result = 37;
 		result = result * 37 + journal.hashCode();
