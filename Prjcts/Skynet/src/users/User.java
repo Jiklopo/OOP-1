@@ -208,4 +208,10 @@ public abstract class User implements Comparable, Serializable {
 		User u = (User)o;
 		return firstName.compareTo(u.firstName);
 	}
+	
+	@Override
+	public String toString()
+	{
+		return id + " " + getFullName() + ", with login " + login; 
+	}
 }
