@@ -5,55 +5,47 @@ import universityStuff.*;
 public class Teacher extends Employee {
 	//fields
 	private HashSet<Course> courses;
-	private HashSet<Subject> subjects;
-	
-	private String name;
-	private String surname;
-	private String faculty;
+	private Faculties faculty;
 
 
-	public Teacher(String password, String firstName, String lastName, String phoneNumber) {
+	public Teacher(String password, String firstName, String lastName, String phoneNumber, Faculties faculty) {
 		super(password, firstName, lastName, phoneNumber);
+		this.faculty = faculty;
 	}
-	//get/set
-	public String getName() { return this.name; }
-	public String getSurname() { return this.surname; }
-	public String getFaculty() { return this.faculty; }
-	public void setFaculty(String faculty) { this.faculty = faculty; }
+
+	public String getFaculty() { return this.faculty.toString();}
+	public void setFaculty(Faculties faculty) { this.faculty = faculty; }
+
+	public static Vector<Teacher> getAllTeachers()
+	{
+		Vector<Teacher> res = new Vector<Teacher>();
+		for(User u: allUsers.keySet())
+		{
+			if(u instanceof Teacher)
+				res.add((Teacher)u);
+		}
+		Collections.sort(res);
+		return res;
+	}
 
 	//methods
 	public void putMark(Subject subject, Student student, float grade, String attestationPeriod) {
-
-		for(Student s: subject.getStudents())
-			if(s.equals(student))
-			{
-				s.receiveMark(grade, attestationPeriod);
-				return;
-			}
+		student.receiveMark(grade, attestationPeriod);
 	}
 
 
 	public void markAttendance(Subject subject, Student student, Date date, boolean attendance) 
 	{
-		for(Student s: subject.getStudents())
-		{
-			if(s.equals(student))
-			{
-				s.receiveAttendence(subject, date, attendance);
-			}
-		}		
+		student.receiveAttendence(subject, date, attendance);		
 	}
 
-	public String viewStudentInfo() {
-		return "";
-	}
-	
-	public void viewCourses(){
-		int i = 1;
-		for(Course c : courses){
-			System.out.println(i + "." + c);
-			i++;
+	public String viewStudentsInfo(Subject subject) {
+		String res = "";
+		for(Student s: subject.getStudents())
+		{
+			res += s + " " + s.getCurrentSubjects().get(subject) + "\n";
 		}
+		return res;
 	}
 
 	//equals/hashcode/toString
@@ -67,8 +59,7 @@ public class Teacher extends Employee {
 
 
 	public String toString() {
-		return " Teacher: " + this.surname + " " + this.name + " " +this.faculty + "\""
-				+ "Courses:" + this.courses + " " + "subjects" + this.subjects;
+		return super.toString() + ", Teacher";
 	}
 }
 

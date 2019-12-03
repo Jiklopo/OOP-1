@@ -14,8 +14,7 @@ public class UserFactory {
 		else if(userType.equalsIgnoreCase("admin"))
 			return new Admin(password, firstName, lastName, phoneNumber);
 		else if(userType.equalsIgnoreCase("student"))
-			return new Student(password, firstName, lastName, phoneNumber);
-		
+			return new Student(password, firstName, lastName, phoneNumber);		
 		return null;
 	}
 }

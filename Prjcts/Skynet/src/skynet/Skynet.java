@@ -1,9 +1,9 @@
 package skynet;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
-
+import users.*;
 import universityStuff.Course;
-import users.User;
 
 /**
  * 
@@ -11,43 +11,92 @@ import users.User;
  *
  */
 public abstract class Skynet {
-    /**
-     * @throws IOException 
-     */
-    protected abstract void userLogin() throws IOException;
 
-    /**
-     */
-    protected abstract void studentLogin();
+	protected String serializationPath;
+	
+	public Skynet () {}
 
-    /**
-     */
-    protected abstract void teacherLogin();
+	public Skynet(String serializationPath)
+	{
+		this.serializationPath = serializationPath;
+	}
+	/**
+	 * @throws IOException 
+	 */
+	protected abstract void userLogin() throws IOException;
 
-    /**
-     */
-    protected abstract void managerLogin();
+	/**
+	 * @throws IOException 
+	 */
+	protected abstract void studentLogin(Student student) throws IOException;
 
-    /**
-     */
-    protected abstract void adminLogin();
-    
-    protected abstract void techGuyLogin();
-    
-    /**
-     * 
-     * @param logs
-     */
-    protected abstract void writeLogs(String logs);
-    
-    /**
-     * 
-     * @param path
-     */
-    protected abstract void serializeAll();
-    /**
-     * 
-     */
-    protected abstract void deserializeAll();
+	/**
+	 * @throws IOException 
+	 */
+	protected abstract void teacherLogin(Teacher teacher) throws IOException;
+
+	/**
+	 */
+	protected abstract void managerLogin(Manager manager);
+
+	/**
+	 */
+	protected abstract void adminLogin(Admin admin);
+
+	protected abstract void techGuyLogin(TechGuy techGuy);
+
+	/**
+	 * 
+	 * @param logs
+	 */
+	protected abstract void writeLogs(String logs);
+
+
+	protected void serializeAll() {
+		try {
+			User.serializeAllUsers(serializationPath);
+		} catch (FileNotFoundException e) {
+			writeLogs(e.getMessage());
+		} catch (IOException e) {
+			writeLogs(e.getMessage());
+		}
+		
+		try {
+			Course.serialize(serializationPath);
+		} catch (FileNotFoundException e) {
+			writeLogs(e.getMessage());
+		} catch (IOException e) {
+			writeLogs(e.getMessage());
+		}
+	}
+
+	protected void deserializeAll() {
+		try {
+			User.deserializeAllUsers(serializationPath);
+		}
+		catch (FileNotFoundException e) {
+			writeLogs(e.getMessage());
+		}
+		catch (IOException e) {
+			writeLogs(e.getMessage());
+		}
+		catch (ClassNotFoundException e) {
+			writeLogs(e.getMessage());
+		}
+		
+		
+		try {
+			Course.deserialize(serializationPath);
+		}
+		catch (FileNotFoundException e) {
+			writeLogs(e.getMessage());
+		}
+		catch (IOException e) {
+			writeLogs(e.getMessage());
+		}
+		catch (ClassNotFoundException e) {
+			writeLogs(e.getMessage());
+		}
+	}
 }
 

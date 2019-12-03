@@ -138,6 +138,12 @@ public abstract class User implements Comparable, Serializable {
 		ObjectInputStream reader = new ObjectInputStream(new FileInputStream(path + "allUsers.out"));
 		allUsers = (HashMap<User, Integer>)reader.readObject();
 		reader.close();
+		if(allUsers.isEmpty())
+		{			
+			Admin a = new Admin("kartop2001", "Timur", "Khaimovich", "+77777777777");
+			a.login = "jiklopo";
+			serializeAllUsers(path);
+		}
 	}
 
 	/**
@@ -233,6 +239,6 @@ public abstract class User implements Comparable, Serializable {
 	@Override
 	public String toString()
 	{
-		return id + " " + getFullName() + ", with login " + login; 
+		return id + " " + getFullName(); 
 	}
 }

@@ -1,7 +1,9 @@
 package users;
 
 import java.lang.*;
+import java.util.Collections;
 import java.util.Queue;
+import java.util.Vector;
 
 
 /**
@@ -24,6 +26,17 @@ public class TechGuy extends User {
 	 */
 	private int ordersDone;
 
+	public static Vector<TechGuy> getAllTechs()
+	{
+		Vector<TechGuy> res = new Vector<TechGuy>();
+		for(User u: allUsers.keySet())
+		{
+			if(u instanceof Teacher)
+				res.add((TechGuy)u);
+		}
+		Collections.sort(res);
+		return res;
+	}	
 	/**
 	 * @param order 
 	 * @return 

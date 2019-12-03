@@ -1,4 +1,7 @@
 package users;
+import java.util.Collections;
+import java.util.Vector;
+
 import universityStuff.*;
 /**
  */
@@ -9,6 +12,19 @@ public class Manager extends Employee {
 	{
 		super(password, firstName, lastName, phoneNumber);
 	}
+	
+	public static Vector<Manager> getAllManagers()
+	{
+		Vector<Manager> res = new Vector<Manager>();
+		for(User u: allUsers.keySet())
+		{
+			if(u instanceof Manager)
+				res.add((Manager)u);
+		}
+		Collections.sort(res);
+		return res;
+	}
+	
 	/**
 	 * @param header 
 	 * @param text 

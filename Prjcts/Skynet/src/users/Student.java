@@ -7,19 +7,6 @@ import universityStuff.*;
 /**
  */
 public class Student extends User {
-	
-	public Student()
-	{
-		transcript = new Transcript();
-		journal = new HashMap<Subject, AttendanceJournal>();
-		timeTable = new TimeTable();
-	}
-
-	public Student(String password, String firstName, String lastName, String phoneNumber) {
-		super(password, firstName, lastName, phoneNumber);
-		// TODO Auto-generated constructor stub
-	}
-
 	/**
 	 */
 	private Transcript transcript;
@@ -38,6 +25,28 @@ public class Student extends User {
 	/**
 	 */
 	private HashMap<Subject, Mark> currentSubjects;
+	
+	public Student() {}
+	
+	public Student(String password, String firstName, String lastName, String phoneNumber) {
+		super(password, firstName, lastName, phoneNumber);
+		transcript = new Transcript();
+		journal = new HashMap<Subject, AttendanceJournal>();
+		timeTable = new TimeTable();
+	}
+	
+	public static Vector<Student> getAllStudents()
+	{
+		Vector<Student> res = new Vector<Student>();
+		for(User u: allUsers.keySet())
+		{
+			if(u instanceof Student)
+				res.add((Student)u);
+		}
+		Collections.sort(res);
+		return res;
+	}
+	
 	/**
 	 */
 	public void receiveMark(float grade, String attestationPeriod) {

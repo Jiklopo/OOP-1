@@ -2,6 +2,8 @@ package skynet;
 
 import users.*;
 import java.io.*;
+import java.util.*;
+
 import universityStuff.*;
 
 /**
@@ -19,24 +21,25 @@ public class SkynetConsole extends Skynet{
 	
 	public SkynetConsole(String serializationPath)
 	{
-		setSerializationPath(serializationPath);;
+		super(serializationPath);
 	}
-	
-	
 	
 	
 	public void startSession() throws IOException
 	{
 		int choice = -1;
 		String[] choices = new String[] {"Login", "Exit"};
-		while(choice != choices.length - 1)
+		deserializeAll();
+		while(choice != choices.length)
 		{
 			out.write(listVariants(choices));
+			out.flush();
 			choice = in.read();
 			if(choice == 1)
 			{
 				userLogin();
 			}
+			serializeAll();
 		}
 		
 	}
@@ -49,6 +52,7 @@ public class SkynetConsole extends Skynet{
 		while(!login.equalsIgnoreCase("0"))
 		{
 			out.write(loginMessage);
+			out.flush();
 			login = in.readLine();
 			String password = in.readLine();
 			User user = User.getUserByLogin(login);
@@ -56,23 +60,23 @@ public class SkynetConsole extends Skynet{
 			{
 				if(user instanceof Admin)
 				{
-					adminLogin();
+					adminLogin((Admin)user);
 				}
 				else if(user instanceof Student)
 				{
-					studentLogin();
+					studentLogin((Student)user);
 				}
 				else if(user instanceof Teacher)
 				{
-					teacherLogin();
+					teacherLogin((Teacher)user);
 				}
 				else if(user instanceof Manager)
 				{
-					managerLogin();
+					managerLogin((Manager)user);
 				}
 				else if(user instanceof TechGuy)
 				{
-					techGuyLogin();
+					techGuyLogin((TechGuy)user);
 				}
 				break;
 			}
@@ -81,83 +85,86 @@ public class SkynetConsole extends Skynet{
 	}
 
 	@Override
-	protected void studentLogin() {
+	protected void studentLogin(Student student) throws IOException 
+	{
+		int choice = -1;
+		String[] choices = new String[] {"View transcript",
+				"View Attendance Journal",
+				"View Timetable",
+				"Exit"};
+		while (choice != choices.length)
+		{
+			out.write(listVariants(choices));
+			out.flush();
+			choice = in.read();
+			if(choice == 1)
+			{
+				out.write(student.getTranscript().toString());
+			}
+			else if(choice == 2)
+			{
+				for(Subject s: student.getJournal().keySet())
+				{
+					out.write(student.getJournal().get(s) + "\n");
+				}
+			}
+			else if(choice == 3)
+			{
+				out.write(student.getTimeTable().toString());
+			}
+			out.flush();
+		}
+	}
+
+	@Override
+	protected void teacherLogin(Teacher teacher) throws IOException {
+		int choice = -1;
+		String[] choices = new String[] {"View Students' Information",
+				"Put Mark",
+				"",
+				"Exit"};
+		while (choice != choices.length)
+		{
+			out.write(listVariants(choices));
+			out.flush();
+			choice = in.read();
+			if(choice == 1)
+			{
+				
+			}
+		}
+	}
+
+	@Override
+	protected void managerLogin(Manager manager) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	protected void teacherLogin() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void managerLogin() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void adminLogin() {
+	protected void adminLogin(Admin admin) {
 		// TODO Auto-generated method stub
 		
 	}
 	
 	@Override
-	protected void techGuyLogin() {
+	protected void techGuyLogin(TechGuy techGuy) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	protected void writeLogs(String logs) {
+	protected void writeLogs(String logs)
+	{		
 		try {
-			out.write(logs);
+			BufferedWriter logWriter = new BufferedWriter(new FileWriter("src\\resources\\logs.txt", true));
+			logWriter.write(logs + "\n");
+			logWriter.close();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			System.out.println(logs);
-		}		
-	}
-
-	@Override
-	protected void serializeAll() {
-		try {
-			User.serializeAllUsers(serializationPath);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-		
-		try {
-			Course.serialize(serializationPath);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	protected void deserializeAll() {
-		try {
-			User.deserializeAllUsers(serializationPath);
-		} catch (ClassNotFoundException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		try {
-			Course.deserialize(serializationPath);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		};
-		
 	}
 	
 	private String listVariants(String[] variants)

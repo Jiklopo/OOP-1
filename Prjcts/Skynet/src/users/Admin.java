@@ -1,5 +1,7 @@
 package users;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.Vector;
 
 /**
  * 
@@ -11,18 +13,23 @@ public class Admin extends User {
 	{
 		super(password, firstName, lastName, phoneNumber);
 	}
-	/**
-	 * @param user 
-	 * @return 
-	 */
-	public boolean createUser(User user) 
+	
+	public static Vector<Admin> getAllAdmins()
 	{
-		return false;
+		Vector<Admin> res = new Vector<Admin>();
+		for(User u: allUsers.keySet())
+		{
+			if(u instanceof Admin)
+				res.add((Admin)u);
+		}
+		Collections.sort(res);
+		return res;
 	}
 	
-	public boolean createUser(String userType, String login, String firstName, String lastName, String phoneNumber)
+	
+	public User createUser(String userType, String password, String firstName, String lastName, String phoneNumber)
 	{
-		return true;
+		return UserFactory.getUser(userType, password, firstName, lastName, phoneNumber);
 	}
 	/**
 	 * @param login 
@@ -30,7 +37,7 @@ public class Admin extends User {
 	 */
 	public boolean removeUser(String login) 
 	{
-		return false;
+		return allUsers.remove(User.getUserByLogin(login)) != null;
 	}
 	/**
 	 * @param user 
@@ -42,32 +49,51 @@ public class Admin extends User {
 		return !allUsers.remove(user).equals(null);
 	}
 	/**
-	 * @param newLogin 
-	 * @param oldLogin 
-	 * @return 
-	 */
-	public boolean changeUserLogin (String oldLogin, String newLogin) throws UserNotFoundException 
-	{
-		return false;
-	}
-	/**
 	 * @param newName 
 	 * @param oldName 
 	 * @param login 
 	 * @return 
 	 */
-	public boolean changeUserName(String login, String oldName, String newName) 
+	public boolean changeUserFirstName(String login, String newFirstName) 
 	{
-		return false;
+		User user = User.getUserByLogin(login);
+		if(user == null)
+			return false;
+		return changeUserFirstName(user, newFirstName);
 	}
-	/**
-	 * @param oldNumber 
-	 * @param newNumber 
-	 * @param user 
-	 * @return 
-	 */
-	public boolean changeUserNumber(User user, String oldNumber, String newNumber) throws UserNotFoundException
+	
+	
+	public boolean changeUserFirstName(User user, String newFirstName)
 	{
+		user.firstName = newFirstName;
+		return true;
+	}
+
+	public boolean changeUserLastName(User user, String newLastName)
+	{
+		user.lastName = newLastName;
+		return true;
+	}
+	
+	public boolean changeUserLastName(String login, String newLastName) 
+	{
+		User user = User.getUserByLogin(login);
+		if(user == null)
+			return false;
+		return changeUserLastName(user, newLastName);
+	}
+	
+	public boolean changeUserNumber(String login, String newNumber)
+	{
+		User user = User.getUserByLogin(login);
+		if(user == null)
+			return false;
+		return changeUserNumber(user, newNumber);
+	}
+	
+	public boolean changeUserNumber(User user, String newNumber)
+	{
+		user.phoneNumber = newNumber;
 		return true;
 	}
 	/**
