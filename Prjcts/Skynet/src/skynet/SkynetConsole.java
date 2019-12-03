@@ -2,8 +2,7 @@ package skynet;
 
 import users.*;
 import java.io.*;
-
-import universityStuff.Course;
+import universityStuff.*;
 
 /**
  * 
