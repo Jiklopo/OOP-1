@@ -8,14 +8,10 @@ import universityStuff.*;
  */
 public class AttendanceJournal implements Serializable, Comparable{
 
-	public AttendanceJournal(Subject subject) {
+	public AttendanceJournal() {
 		journal = new HashMap<Date, Boolean>();
-		this.subject = subject;
-
 		// TODO Auto-generated constructor stub
 	}
-
-	public AttendanceJournal() {}
 	/**
 	 */
 	private Subject subject;

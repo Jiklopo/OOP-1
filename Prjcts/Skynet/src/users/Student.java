@@ -8,7 +8,8 @@ import universityStuff.*;
  */
 public class Student extends User {
 	
-	public Student() {
+	public Student()
+	{
 		transcript = new Transcript();
 		journal = new HashMap<Subject, AttendanceJournal>();
 		timeTable = new TimeTable();

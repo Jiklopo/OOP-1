@@ -1,41 +1,53 @@
 package skynet;
+
+import java.io.IOException;
+
+import universityStuff.Course;
+import users.User;
+
 /**
  * 
  * @author Jiklopo
  *
  */
-public interface Skynet {
+public abstract class Skynet {
     /**
-     * @param password 
-     * @param login 
-     * @return 
+     * @throws IOException 
      */
-    boolean checkLogin(String login, String password);
+    protected abstract void userLogin() throws IOException;
 
     /**
      */
-    void userLogin();
+    protected abstract void studentLogin();
 
     /**
      */
-    void studentLogin();
+    protected abstract void teacherLogin();
 
     /**
      */
-    void teacherLogin();
+    protected abstract void managerLogin();
 
     /**
      */
-    void managerLogin();
-
-    /**
-     */
-    void adminLogin();
+    protected abstract void adminLogin();
+    
+    protected abstract void techGuyLogin();
     
     /**
      * 
      * @param logs
      */
-    void writeLogs(String logs);
+    protected abstract void writeLogs(String logs);
+    
+    /**
+     * 
+     * @param path
+     */
+    protected abstract void serializeAll();
+    /**
+     * 
+     */
+    protected abstract void deserializeAll();
 }
 

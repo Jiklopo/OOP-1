@@ -14,7 +14,6 @@ public abstract class User implements Comparable, Serializable {
 	*/
 	protected static HashMap<User, Integer> allUsers;
 
-
 	/**
 	 * Login used to log into the Skynet
 	*/
@@ -42,9 +41,6 @@ public abstract class User implements Comparable, Serializable {
 	/**
 	*/
 	public static Comparator<User> COMPARE_BY_LOGIN = Comparator.comparing(User::getLogin);
-	/**
-	*/
-	private static String serializationPath;
 	
 	//Constructors	
 	/**
@@ -86,7 +82,7 @@ public abstract class User implements Comparable, Serializable {
 	private String generateLogin(String firstName, String lastName)
 	{
 		int charsFromName = 1, delimNumber = 0;
-		char[] delimiters = {'_', '-', '.', ':'};
+		char[] delimiters = {'_', '-', '.', ':', '~', '<', '>'};
 		String login = null;
 		do{
 			login = firstName.substring(0, charsFromName) + 
@@ -126,8 +122,8 @@ public abstract class User implements Comparable, Serializable {
 	 * @throws IOException 
 	 * @throws FileNotFoundException 
 	*/
-	public static void serializeAllUsers() throws FileNotFoundException, IOException {
-		ObjectOutputStream writer = new ObjectOutputStream(new FileOutputStream(serializationPath));
+	public static void serializeAllUsers(String path) throws FileNotFoundException, IOException {
+		ObjectOutputStream writer = new ObjectOutputStream(new FileOutputStream(path + "allUsers.out"));
 		writer.writeObject(allUsers);
 		writer.close();
 	}
@@ -137,9 +133,9 @@ public abstract class User implements Comparable, Serializable {
 	 * @throws FileNotFoundException
 	 * @throws ClassNotFoundException 
 	 */
-	public static void deserializeAllUsers() throws IOException, FileNotFoundException, ClassNotFoundException
+	public static void deserializeAllUsers(String path) throws IOException, FileNotFoundException, ClassNotFoundException
 	{
-		ObjectInputStream reader = new ObjectInputStream(new FileInputStream(serializationPath));
+		ObjectInputStream reader = new ObjectInputStream(new FileInputStream(path + "allUsers.out"));
 		allUsers = (HashMap<User, Integer>)reader.readObject();
 		reader.close();
 	}
@@ -148,8 +144,28 @@ public abstract class User implements Comparable, Serializable {
 	 * @param password
 	 * @return
 	 */
-	public boolean login(String password) {
+	public static boolean checkLogin(String login, String password) {
+		User u = getUserByLogin(login);
+		if(u != null)
+		{
+			return allUsers.get(u).equals(password.hashCode());
+		}
 		return false;
+	}
+	
+	public static boolean checkLogin(User u, String password)
+	{
+		return allUsers.get(u).equals(password.hashCode());
+	}
+	
+	public static User getUserByLogin(String login)
+	{
+		for(User u: allUsers.keySet())
+		{
+			if(u.login.equals(login))
+				return u;
+		}
+		return null;
 	}
 
 	public String getLogin() {
@@ -176,6 +192,11 @@ public abstract class User implements Comparable, Serializable {
 
 	public String getId() {
 		return id;
+	}
+	
+	public static HashMap<User, Integer> getAllUsers()
+	{
+		return allUsers;
 	}
 	
 	@Override

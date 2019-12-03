@@ -107,11 +107,7 @@ public class Employee extends Person implements Comparable, Cloneable
 
 	public int compareTo(Object o) {
 		Employee e = (Employee)o;
-		if(this.salary > e.salary)
-			return 1;
-		else if(this.salary < e.salary)
-			return -1;
-		return 0;
+		return (int)(salary - e.salary);
 	}
 	
 	public Employee clone() throws CloneNotSupportedException

@@ -2,6 +2,9 @@ package users;
 import java.util.Comparator;
 
 /**
+ * 
+ * @author Jiklopo
+ *
  */
 public class Admin extends User {
 	public Admin(String password, String firstName, String lastName, String phoneNumber) 
