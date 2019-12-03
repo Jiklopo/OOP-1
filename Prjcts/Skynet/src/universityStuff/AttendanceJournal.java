@@ -1,26 +1,63 @@
 package universityStuff;
+
 import java.util.*;
 import universityStuff.*;
-import HashSet<Users.User>;
+
 /**
-*/
-public class AttendanceJournal {
-/**
-*/
-private Subject subject;
-/**
-*/
-private HashMap<Date, Boolean> attendance;
-/**
- * @param date 
- * @param attendance 
-*/
-public void markAttendance(Date date, boolean attendance) {
-}
-/**
- * @param attendance 
-*/
-public void markTodaysAttendance(boolean attendance) {
-}
+ */
+public class AttendanceJournal implements Serializable, Comparable{
+	
+	public AttendanceJournal(Subject subject) {
+		journal = new HashMap<Date, Boolean>();
+		this.subject = subject;
+		
+	    // TODO Auto-generated constructor stub
+	 }
+	
+	public AttendanceJournal() {
+		
+	}
+    /**
+     */
+    private Subject subject;
+
+    /**
+     */
+    private HashMap<Date, Boolean> journal;
+
+    /**
+     * @param date 
+     * @param attendance 
+     */
+    public void markAttendance(Date date, boolean attendance) {
+    	journal[date] = attendance;
+    }
+
+    /**
+     * @param attendance 
+     */
+    public void markTodaysAttendance(boolean attendance) {
+    }
+    
+    public boolean equals(Object o) {
+    	Journal j = (Journal) o;
+    	if(this == j) return true;
+    	
+    	if(!(this instanceof j)) return false;
+    	return this.subject.equals(j.subject);
+    }
+    
+    public int compareTo(Object o) {
+		AttendanceJournal aj = (AttendanceJournal) o;
+		return this.subject.compareTo(aj.subject);
+	}
+    
+    public int hashCode()
+	{
+		int result = 37;
+		result = result * 37 + journal.hashCode();
+		result = result * 37 + subject.hashCode();
+		return result;
+	}
 }
 
