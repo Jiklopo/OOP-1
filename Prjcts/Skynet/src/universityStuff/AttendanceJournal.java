@@ -8,10 +8,14 @@ import universityStuff.*;
  */
 public class AttendanceJournal implements Serializable, Comparable{
 
-	public AttendanceJournal() {
+	public AttendanceJournal(Subject subject) {
 		journal = new HashMap<Date, Boolean>();
+		this.subject = subject;
+
 		// TODO Auto-generated constructor stub
 	}
+
+	public AttendanceJournal() {}
 	/**
 	 */
 	private Subject subject;
@@ -54,5 +58,20 @@ public class AttendanceJournal implements Serializable, Comparable{
 		result = result * 37 + subject.hashCode();
 		return result;
 	}
+	
+	public String toString() {
+		String res = "";
+		for(Date d: journal.keySet())
+		{
+			String attended = journal.get(d)?"Attended":"Not Attended";
+			res += d + ": " + attended;
+		}
+		return res;
+	}
+	
+	/**In the AttendanceJournal class 
+	 * we select the subject, 
+	 * then we mark on which days 
+	 * the student attended or did not attend classes
+	 */
 }
-

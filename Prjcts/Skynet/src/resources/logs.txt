@@ -1,0 +1,40 @@
+null
+null
+2019-12-04T09:54:56.113999 null
+2019-12-04T09:54:56.116989900 null
+2019-12-04T09:55:33.256639200 null
+2019-12-04T09:55:33.258664400 null
+2019-12-04T09:56:47.333771200 null
+2019-12-04T09:56:47.335703400 null
+2019-12-04T09:58:01.679568400 src\resources\allUsers.out (Не удается найти указанный файл)
+2019-12-04T09:58:01.691566 null
+2019-12-04T10:11:18.332319800 src\resources\allUsers.out (Не удается найти указанный файл)
+2019-12-04T10:11:18.347279500 null
+2019-12-04T10:11:26.700167900 19SKY0 Timur Khaimovich T_Khaimovich logged in
+2019-12-04T10:18:56.496298200 src\resources\allUsers.out (Не удается найти указанный файл)
+2019-12-04T10:18:56.514249400 null
+2019-12-04T10:21:05.482315400 src\resources\allUsers.out (Не удается найти указанный файл)
+2019-12-04T10:21:05.493284900 null
+2019-12-04T10:21:10.281306700 19SKY0 Timur Khaimovich logged in
+2019-12-04T10:22:06.810913900 src\resources\allUsers.out (Не удается найти указанный файл)
+2019-12-04T10:22:06.821882100 null
+2019-12-04T10:22:15.005075 19SKY0 Timur Khaimovich logged in
+2019-12-04T10:23:35.501668600 src\resources\allUsers.out (Не удается найти указанный файл)
+2019-12-04T10:23:35.511641300 null
+2019-12-04T10:23:49.537676300 19SKY0 Timur Khaimovich logged in
+2019-12-04T10:24:58.017089800 src\resources\allUsers.out (Не удается найти указанный файл)
+2019-12-04T10:24:58.030059700 null
+2019-12-04T10:25:05.924138200 19SKY0 Timur Khaimovich logged in
+2019-12-04T10:25:21.028589200 19SKY0 Timur Khaimovich created a user 
+2019-12-04T10:29:17.904851300 null
+2019-12-04T10:29:25.585542 19SKY0 Timur Khaimovich logged in
+2019-12-04T10:33:29.121063700 null
+2019-12-04T10:33:51.622026900 19SKY0 Timur Khaimovich logged in
+2019-12-04T10:35:07.317267500 null
+2019-12-04T10:35:20.594210500 19SKY0 Timur Khaimovich logged in
+2019-12-04T10:35:48.874311800 null
+2019-12-04T10:35:58.342103200 19SKY0 Timur Khaimovich logged in
+2019-12-04T10:46:18.394659800 null
+2019-12-04T10:46:24.191611 19SKY0 Timur Khaimovich logged in
+2019-12-04T10:55:59.864269300 null
+2019-12-04T10:56:09.862165300 19SKY0 Timur Khaimovich logged in

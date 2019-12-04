@@ -7,6 +7,25 @@ import universityStuff.*;
 /**
  */
 public class Student extends User {
+	
+	public Student(Faculties faculty) {
+		this.faculty = faculty;
+		transcript = new Transcript();
+		journal = new HashMap<Subject, AttendanceJournal>();
+		timeTable = new TimeTable();
+	}
+
+	public Student(String password, String firstName, String lastName, String phoneNumber, Faculties faculty) {
+		super(password, firstName, lastName, phoneNumber);
+		this.faculty = faculty;
+	}
+	
+	private Faculties faculty;
+	
+	public Faculties getFaculty() {
+		return faculty;
+	}
+
 	/**
 	 */
 	private Transcript transcript;
@@ -25,28 +44,6 @@ public class Student extends User {
 	/**
 	 */
 	private HashMap<Subject, Mark> currentSubjects;
-	
-	public Student() {}
-	
-	public Student(String password, String firstName, String lastName, String phoneNumber) {
-		super(password, firstName, lastName, phoneNumber);
-		transcript = new Transcript();
-		journal = new HashMap<Subject, AttendanceJournal>();
-		timeTable = new TimeTable();
-	}
-	
-	public static Vector<Student> getAllStudents()
-	{
-		Vector<Student> res = new Vector<Student>();
-		for(User u: allUsers.keySet())
-		{
-			if(u instanceof Student)
-				res.add((Student)u);
-		}
-		Collections.sort(res);
-		return res;
-	}
-	
 	/**
 	 */
 	public void receiveMark(float grade, String attestationPeriod) {
@@ -90,5 +87,16 @@ public class Student extends User {
 		return result;
 	}
 	
+	public String toString() {
+		return "Faculty: " + getFaculty() + "; " + "Year of study: " + getYear();
+	}
 	
+	/**In the Student class we store student data:
+	 * faculty, 
+	 * year of study, 
+	 * subjects that student have
+	 * transcript, 
+	 * student journal, 
+	 * time table
+	 */
 }

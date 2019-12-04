@@ -44,6 +44,12 @@ public class Transcript implements Serializable{
 		return marks.equals(t.marks);
 	}
     
+    public String toString() {
+    	return marks.toString();
+    }
     
+    /**In the Transcript class, 
+     * a student can find out 
+     * what grades in subjects he has
+     */
 }
-

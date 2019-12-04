@@ -125,5 +125,11 @@ public class Mark implements Serializable, Comparable {
 				+ "Second attestation: " + secondAttestation + "\n"
 				+ "Final grade: " + finalGrade;
 	}
+	
+	/**In the Mark class, 
+	 * a student can find out his points 
+	 * for the first and second grades, 
+	 * points for the final exam 
+	 * and the final grade(the sum of points for both grades and the final exam)
+	 */
 }
-

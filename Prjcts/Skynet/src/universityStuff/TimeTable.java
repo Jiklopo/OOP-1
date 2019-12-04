@@ -42,5 +42,13 @@ public class TimeTable implements Serializable{
     	
     	return timeTable.equals(tt);
     }
+	
+	public String toString() {
+		return timeTable.toString();
+	}
+	
+	/**In the TimeTable class, 
+	 * we show on which days 
+	 * the student should attend certain subjects
+	 */
 }
-

@@ -1,5 +1,10 @@
 package universityStuff;
 
+/**
+ * 
+ * @author Jiklopo
+ * This is enum of all faculties
+ */
 public enum Faculties {
 	FIT,
 	GEOLOGY,

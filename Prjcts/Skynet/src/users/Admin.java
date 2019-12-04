@@ -14,6 +14,10 @@ public class Admin extends User {
 		super(password, firstName, lastName, phoneNumber);
 	}
 	
+	/**
+	 * 
+	 * @return Vector of all Admins that exist.
+	 */
 	public static Vector<Admin> getAllAdmins()
 	{
 		Vector<Admin> res = new Vector<Admin>();
@@ -26,7 +30,15 @@ public class Admin extends User {
 		return res;
 	}
 	
-	
+	/**
+	 * Creates user of type userType
+	 * @param userType
+	 * @param password
+	 * @param firstName
+	 * @param lastName
+	 * @param phoneNumber
+	 * @return
+	 */
 	public User createUser(String userType, String password, String firstName, String lastName, String phoneNumber)
 	{
 		return UserFactory.getUser(userType, password, firstName, lastName, phoneNumber);
@@ -48,11 +60,12 @@ public class Admin extends User {
 	{
 		return !allUsers.remove(user).equals(null);
 	}
+
 	/**
-	 * @param newName 
-	 * @param oldName 
-	 * @param login 
-	 * @return 
+	 * 
+	 * @param login
+	 * @param newFirstName
+	 * @return true if user was found and name changed
 	 */
 	public boolean changeUserFirstName(String login, String newFirstName) 
 	{
@@ -62,19 +75,40 @@ public class Admin extends User {
 		return changeUserFirstName(user, newFirstName);
 	}
 	
-	
+	/**
+	 * 
+	 * @param user
+	 * @param newFirstName
+	 * @return true if name was changed
+	 */
 	public boolean changeUserFirstName(User user, String newFirstName)
 	{
+		if(user == null)
+			return false;
 		user.firstName = newFirstName;
 		return true;
 	}
 
+	/**
+	 * 
+	 * @param user
+	 * @param newFirstName
+	 * @return true if name was changed
+	 */
 	public boolean changeUserLastName(User user, String newLastName)
 	{
+		if(user == null)
+			return false;
 		user.lastName = newLastName;
 		return true;
 	}
 	
+	/**
+	 * 
+	 * @param login
+	 * @param newFirstName
+	 * @return true if name was changed
+	 */
 	public boolean changeUserLastName(String login, String newLastName) 
 	{
 		User user = User.getUserByLogin(login);
@@ -83,6 +117,12 @@ public class Admin extends User {
 		return changeUserLastName(user, newLastName);
 	}
 	
+	/**
+	 * 
+	 * @param login
+	 * @param newNumber
+	 * @return true if number was changed
+	 */
 	public boolean changeUserNumber(String login, String newNumber)
 	{
 		User user = User.getUserByLogin(login);
@@ -91,43 +131,16 @@ public class Admin extends User {
 		return changeUserNumber(user, newNumber);
 	}
 	
+	/**
+	 * 
+	 * @param user
+	 * @param newNumber
+	 * @return true if number was changed
+	 */
 	public boolean changeUserNumber(User user, String newNumber)
 	{
 		user.phoneNumber = newNumber;
 		return true;
-	}
-	/**
-	 * @param newName 
-	 * @param oldName 
-	 * @param user 
-	 * @return 
-	 */
-	public boolean changeUserName(User user, String oldName, String newName) throws UserNotFoundException
-	{
-		return true;
-	}
-
-	/**
-	 * @param newLogin 
-	 * @param user 
-	 * @return 
-	 */
-	public boolean changeUserLogin(User user, String newLogin) throws UserNotFoundException
-	{
-		return true;
-	}
-	/**
-	 * @return 
-	 */
-	public String viewUsers() {
-		return null;
-	}
-	/**
-	 * @param comparator 
-	 * @return 
-	 */
-	public String viewUsers(Comparator comparator) {
-		return null;
 	}
 }
 

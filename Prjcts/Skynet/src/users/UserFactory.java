@@ -1,5 +1,7 @@
 package users;
 
+import universityStuff.*;
+
 public class UserFactory {
 	public static User getUser(String userType, String password, String firstName, String lastName, String phoneNumber)
 	{
@@ -14,7 +16,7 @@ public class UserFactory {
 		else if(userType.equalsIgnoreCase("admin"))
 			return new Admin(password, firstName, lastName, phoneNumber);
 		else if(userType.equalsIgnoreCase("student"))
-			return new Student(password, firstName, lastName, phoneNumber);		
+			return new Student(password, firstName, lastName, phoneNumber, Faculties.FIT);		
 		return null;
 	}
 }

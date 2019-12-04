@@ -2,6 +2,7 @@ package users;
 
 import java.util.*;
 
+import universityStuff.Faculties;
 
 import java.io.*;
 
@@ -39,9 +40,18 @@ public abstract class User implements Comparable, Serializable {
 	*/
 	public static final Comparator<User> COMPARE_BY_ID = Comparator.comparing(User::getId);
 	/**
+	 * Comparator used to sort users by login
 	*/
 	public static Comparator<User> COMPARE_BY_LOGIN = Comparator.comparing(User::getLogin);
 	
+	
+	/**
+	 * Instantiates static HashMap of all users to avoid null pointer exception
+	 */
+	static
+	{
+		allUsers = new HashMap<User, Integer>();
+	}
 	//Constructors	
 	/**
 	 * Automatically creates id number
@@ -64,7 +74,7 @@ public abstract class User implements Comparable, Serializable {
 	/**
 	 * Checks if user with such login exists or not
 	 * @param login
-	 * @return
+	 * @return true if login is occupied
 	 */
 	public boolean isLoginOccupied(String login)
 	{
@@ -77,7 +87,10 @@ public abstract class User implements Comparable, Serializable {
 	}
 	
 	/**
-	 * This method almost guarantees uniqueness of a login
+	 * Generates unique login from first and last name;
+	 * @param firstName
+	 * @param lastName
+	 * @return unique login
 	 */
 	private String generateLogin(String firstName, String lastName)
 	{
@@ -119,9 +132,11 @@ public abstract class User implements Comparable, Serializable {
 
 
 	/**
-	 * @throws IOException 
-	 * @throws FileNotFoundException 
-	*/
+	 * Serializes allUsers field.
+	 * @param path It must end with // because it indicates folder where file allUsers.out will be stored
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public static void serializeAllUsers(String path) throws FileNotFoundException, IOException {
 		ObjectOutputStream writer = new ObjectOutputStream(new FileOutputStream(path + "allUsers.out"));
 		writer.writeObject(allUsers);
@@ -129,26 +144,34 @@ public abstract class User implements Comparable, Serializable {
 	}
 	
 	/**
-	 * @throws IOException 
+	 * Deserializes allUsers field.
+	 * @param path It must end with // because it indicates folder where file allUsers.out will be stored
 	 * @throws FileNotFoundException
-	 * @throws ClassNotFoundException 
+	 * @throws IOException
 	 */
 	public static void deserializeAllUsers(String path) throws IOException, FileNotFoundException, ClassNotFoundException
 	{
+		
 		ObjectInputStream reader = new ObjectInputStream(new FileInputStream(path + "allUsers.out"));
 		allUsers = (HashMap<User, Integer>)reader.readObject();
 		reader.close();
+		if(allUsers == null)
+		{
+			allUsers = new HashMap<User, Integer>();
+		}
 		if(allUsers.isEmpty())
 		{			
-			Admin a = new Admin("kartop2001", "Timur", "Khaimovich", "+77777777777");
+			Student a = new Student("1234", "Timur", "Khaimovich", "+77777777777", Faculties.FIT);
 			a.login = "jiklopo";
 			serializeAllUsers(path);
 		}
 	}
 
 	/**
+	 * Checks validity of login and password combination
+	 * @param login
 	 * @param password
-	 * @return
+	 * @return true if combination is valid.
 	 */
 	public static boolean checkLogin(String login, String password) {
 		User u = getUserByLogin(login);
@@ -159,16 +182,23 @@ public abstract class User implements Comparable, Serializable {
 		return false;
 	}
 	
-	public static boolean checkLogin(User u, String password)
+	public static boolean checkLogin(User user, String password)
 	{
-		return allUsers.get(u).equals(password.hashCode());
+		if(user == null)
+			return false;
+		return allUsers.get(user) == password.hashCode();
 	}
 	
+	/**
+	 * Searches user by login
+	 * @param login login of the user you are looking for
+	 * @return User with such login or null if user was not found
+	 */
 	public static User getUserByLogin(String login)
 	{
 		for(User u: allUsers.keySet())
 		{
-			if(u.login.equals(login))
+			if(u.login.equalsIgnoreCase(login))
 				return u;
 		}
 		return null;
@@ -178,6 +208,10 @@ public abstract class User implements Comparable, Serializable {
 		return login;
 	}
 
+	/**
+	 * 
+	 * @return First Name and Last Name in one String
+	 */
 	public String getFullName() {
 		return firstName + " " + lastName;
 	}
@@ -230,6 +264,9 @@ public abstract class User implements Comparable, Serializable {
 	}
 	
 	@Override
+	/**
+	 * Compares users by full name
+	 */
 	public int compareTo(Object o)
 	{
 		User u = (User)o;
@@ -239,6 +276,6 @@ public abstract class User implements Comparable, Serializable {
 	@Override
 	public String toString()
 	{
-		return id + " " + getFullName(); 
+		return id + " " + getFullName();
 	}
 }
