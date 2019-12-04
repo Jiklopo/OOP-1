@@ -29,6 +29,7 @@ public class SkynetConsole extends Skynet{
 	public SkynetConsole(String serializationPath)
 	{
 		super(serializationPath);
+		Admin a = new Admin("1234", "Timur", "Khaimovich", "12345678");
 	}
 	
 	
@@ -71,7 +72,6 @@ public class SkynetConsole extends Skynet{
 			String password = in.next();
 			
 			User user = User.getUserByLogin(login);
-			System.out.println(User.getAllUsers().toString());
 			if(User.checkLogin(user, password))
 			{
 				writeLogs(user + " logged in");
@@ -97,8 +97,7 @@ public class SkynetConsole extends Skynet{
 				}
 				break;
 			}
-		}
-		
+		}		
 	}
 
 	@Override
@@ -188,8 +187,8 @@ public class SkynetConsole extends Skynet{
 				out.write("Phone number: ");
 				out.flush();
 				number = in.next();
-				admin.createUser(type, password, name1, name2, number);
-				writeLogs(admin + " created a user ");
+				User createdUser = admin.createUser(type, password, name1, name2, number);
+				writeLogs(admin + " created a user " + createdUser);
 				serializeAll();
 			}
 			else if(choice == 2)
@@ -204,17 +203,17 @@ public class SkynetConsole extends Skynet{
 					String whatToChange = in.next();
 					String newString = in.next();
 					String logs = "Admin " + admin + " changed user's " + user + " " + whatToChange + " to " + newString;
-					if(whatToChange.equalsIgnoreCase("first name"))
+					if(whatToChange.equalsIgnoreCase("firstname"))
 					{
 						admin.changeUserFirstName(user, newString);
 						writeLogs(logs);
 					}
-					else if(whatToChange.equalsIgnoreCase("last name"))
+					else if(whatToChange.equalsIgnoreCase("lastname"))
 					{
 						admin.changeUserLastName(user, newString);
 						writeLogs(logs);
 					}
-					else if(whatToChange.equalsIgnoreCase("phone number"))
+					else if(whatToChange.equalsIgnoreCase("phonenumber"))
 					{
 						admin.changeUserNumber(user, newString);
 						writeLogs(logs);

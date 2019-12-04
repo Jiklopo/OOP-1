@@ -23,6 +23,10 @@ public class Teacher extends Employee{
 	 */
 	public String getFaculty() { return this.faculty.toString(); }
 	public void setFaculty(Faculties faculty) { this.faculty = faculty; }
+	public HashSet<Course> getCourses()
+	{
+		return courses;
+	}
 	public static Vector<Teacher> getAllTeachers()
 	{
 		Vector<Teacher> res = new Vector<Teacher>();

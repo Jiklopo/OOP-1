@@ -1,6 +1,8 @@
 import java.lang.*;
 
 /**
+ * This abstract class represents how Skynet system should be build.
+ * No matter if it is console application, or any other.
  */
 public abstract class Skynet {
     /**
@@ -13,6 +15,7 @@ public abstract class Skynet {
     }
 
     /**
+     * This is a login screen
      */
     public void userLogin() {
     }

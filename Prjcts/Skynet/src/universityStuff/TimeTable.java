@@ -1,10 +1,11 @@
 package universityStuff;
 
-import java.sql.Date;
 import java.util.*;
 import java.io.*;
 
-/**
+/**In the TimeTable class, 
+ * we show on which days 
+ * the student should attend certain subjects
  */
 public class TimeTable implements Serializable{
 	
@@ -23,6 +24,11 @@ public class TimeTable implements Serializable{
      */
     public boolean checkCollision() {
         return false;
+    }
+    
+    public void addSubject(Subject subject, Date date)
+    {
+    	timeTable.put(subject, date);
     }
     
     @Override
@@ -47,8 +53,5 @@ public class TimeTable implements Serializable{
 		return timeTable.toString();
 	}
 	
-	/**In the TimeTable class, 
-	 * we show on which days 
-	 * the student should attend certain subjects
-	 */
+	
 }

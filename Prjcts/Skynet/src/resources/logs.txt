@@ -38,3 +38,22 @@ null
 2019-12-04T10:46:24.191611 19SKY0 Timur Khaimovich logged in
 2019-12-04T10:55:59.864269300 null
 2019-12-04T10:56:09.862165300 19SKY0 Timur Khaimovich logged in
+2019-12-04T12:20:48.920959 users.TechGuy; local class incompatible: stream classdesc serialVersionUID = 7945947075405914796, local class serialVersionUID = -632838511310523486
+2019-12-04T12:20:48.927940100 null
+2019-12-04T12:21:36.707061900 users.TechGuy; local class incompatible: stream classdesc serialVersionUID = 7945947075405914796, local class serialVersionUID = -632838511310523486
+2019-12-04T12:21:36.710053900 null
+2019-12-04T12:22:34.827646100 users.TechGuy; local class incompatible: stream classdesc serialVersionUID = 7945947075405914796, local class serialVersionUID = -632838511310523486
+2019-12-04T12:22:34.830640200 null
+2019-12-04T12:22:41.287426500 19SKY0 Timur Khaimovich logged in
+2019-12-04T12:23:28.940718300 19SKY0 Timur Khaimovich created a user 
+2019-12-04T12:26:41.964752600 null
+2019-12-04T12:26:51.596181300 19SKY0 Timur Khaimovich logged in
+2019-12-04T12:28:28.075725500 null
+2019-12-04T12:28:35.638626600 19SKY0 Timur Khaimovich logged in
+2019-12-04T12:33:28.797234400 null
+2019-12-04T12:33:49.689046700 19SKY0 Timur Khaimovich logged in
+2019-12-04T12:34:17.402631900 19SKY0 Timur Khaimovich created a user 19SKY2 Vasya Petrov. Current order: null
+2019-12-04T12:35:23.312549800 null
+2019-12-04T12:35:38.077939 19SKY0 Timur Khaimovich logged in
+2019-12-04T12:35:47.415686200 Admin 19SKY0 Timur Khaimovich changed user's 19SKY1 petrov vasya. Current order: null firstname to Vasya
+2019-12-04T12:36:00.602092700 Admin 19SKY0 Timur Khaimovich changed user's 19SKY1 Vasya vasya. Current order: null lastname to Ogurcov
