@@ -1,4 +1,2 @@
-# OOP-1
-OOP 1 course
-
-Я надеюсь, что это поможет вам понять, что происходит.
+# OOP
+I hope it may help you in some way
